@@ -1,0 +1,59 @@
+#bar_chart_wrapper, #line_chart_wrapper{
+    max-width: 780px;
+    min-height: 200px;
+    min-width: 780px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.chart_wrapper{
+    background-color: white;
+    box-shadow: 0 10px 15px 0 rgb(0,0,0,0.35);
+    margin-top: 10px;
+}
+
+.chart_label_wrapper{
+    background-color: rgb(255, 255, 227);
+    font-size: 20px;
+    min-height: 30px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: 0 5px 10px 0 rgba(59, 63, 1, 0.35);
+}
+
+.visitor_and_top_wrapper > #bar_chart_wrapper{
+    max-width: 400px;
+    min-width: 400px;
+}
+
+.visitor_and_top_wrapper > #bar_chart_wrapper:last-of-type{
+    padding-left: 15px;
+}
+
+
+
+.visitor_and_top_wrapper > #bar_chart_wrapper > #bar_chart > canvas{
+    height: 390px;
+}
+
+.visitor_and_top_wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.chart_container > div{
+    display: flex;
+}
+
+.chart_container{
+    width: 98%;
+}
+
+.chart_container > .wrapper:last-of-type > .wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}

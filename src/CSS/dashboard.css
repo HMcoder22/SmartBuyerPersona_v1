@@ -1,0 +1,67 @@
+.dashboard_wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(224, 255, 255, 0.8);
+}
+
+.dashboard_wrapper, #dashboard_navigation, #dashboard_footer{
+    min-width: 1660px;
+}
+
+.stats_bar_wrapper > ul{
+    list-style-type: none;
+    padding: 0;
+    padding-left: 10px;
+    margin: 0;
+    width: 98%;
+    display: flex;
+}
+
+.stats_bar_wrapper > ul > li, ol{
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.stats_bar_wrapper > ul > li{
+    justify-content: flex-end;
+}
+
+
+.stats_bar_wrapper > ul > ol > li{
+    text-align: center;
+    padding: 0;
+    height: 100%;
+    width: 98%;
+    background-color: white;
+    box-shadow: 0 5px 10px 0 rgb(0, 0, 0, 0.25);
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.stats_icon > .label_wrapper{
+    padding: 0;
+    margin: 0;
+    font-size: large;
+    color: black;
+}
+
+.filter_list_wrapper{
+    justify-content: flex-end;
+    width: 20%;
+    min-height: 66px;
+    
+}
+
+.stats_bar_wrapper > ul > ol{
+    width: 80%;
+}
+
+.filter_wrapper {
+    min-width: 300px;
+    text-align: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 5px 10px 0 rgb(0, 0, 0, 0.25);
+}

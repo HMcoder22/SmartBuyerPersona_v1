@@ -1,0 +1,44 @@
+.tool_icon, .tool_icon > a >img{
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+}
+
+.arrow_icon, .arrow_icon > a > img{
+    width: 90px;
+    height: 50px;
+}
+
+ul{
+    display: inline-block;
+    width: 90%;
+    text-align: start;
+    padding-right: 40px;
+}
+
+.tools_wrapper{
+    list-style-type: none;
+    display: inline-block;
+    text-align: start;
+}
+
+.tools_wrapper:not(:first-of-type){
+    float: right;
+}
+
+.tools_wrapper:first-of-type > .arrow_icon > a > img{
+    transform: rotate(-180deg);
+}
+
+.tools_wrapper:first-of-type > .tool_icon > a > img{
+    padding-left: 47px
+}
+
+.tools_wrapper:active{
+    background-color: red;
+}
+
+.transition_tools_wrapper{
+    padding-top: 40px;
+}
