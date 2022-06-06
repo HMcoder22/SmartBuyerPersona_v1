@@ -36,6 +36,9 @@ root.render(
             <Route path='/dashboard' exact>
                 <Dashboard></Dashboard>
             </Route>
+            <Route path='/persona'>
+
+            </Route>
         </Switch>
     </Router>
 );
