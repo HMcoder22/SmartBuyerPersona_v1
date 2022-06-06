@@ -37,7 +37,6 @@ root.render(
                 <Dashboard></Dashboard>
             </Route>
             <Route path='/persona'>
-                <Dashboard></Dashboard>
             </Route>
         </Switch>
     </Router>
