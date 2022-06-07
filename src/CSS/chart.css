@@ -41,7 +41,7 @@
 .visitor_and_top_wrapper{
     display: flex;
     width: 100%;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .chart_container > div{
@@ -55,5 +55,5 @@
 .chart_container > .wrapper:last-of-type > .wrapper{
     display: flex;
     width: 100%;
-    justify-content: end;
+    justify-content: flex-end;
 }

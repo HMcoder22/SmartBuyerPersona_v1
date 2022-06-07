@@ -7,12 +7,14 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import ToolHomePage from './ToolHomepage.js';
 import Dashboard from './Dashboard';
+import Persona from './persona';
 import './CSS/nav.css'
 import './CSS/demo_form.css'
 import './CSS/transition_tools.css'
 import './CSS/tools_homepage.css'
 import './CSS/dashboard.css'
 import './CSS/chart.css'
+import './CSS/persona.css'
 
 const root = ReactDOM.createRoot(document.getElementById('main_home'));
 root.render(
@@ -36,9 +38,18 @@ root.render(
             <Route path='/dashboard' exact>
                 <Dashboard></Dashboard>
             </Route>
-            <Route path='/persona'>
-            <Dashboard></Dashboard>
+            <Route path='/persona' exact>
+                    <Persona></Persona>
             </Route>
+            <Route path='/facebook' exact render={() => {
+                window.location.href = "https://www.facebook.com/";
+            }}></Route>
+            <Route path='/twitter' exact render={() => {
+                window.location.href = "https://www.twitter.com/";
+            }}></Route>
+            <Route path='/instagram' exact render={() => {
+                window.location.href = "https://www.instagram.com/";
+            }}></Route>
         </Switch>
     </Router>
 );
