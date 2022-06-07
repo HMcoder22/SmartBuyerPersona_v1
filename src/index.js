@@ -8,13 +8,15 @@ import reportWebVitals from './reportWebVitals';
 import ToolHomePage from './ToolHomepage.js';
 import Dashboard from './Dashboard';
 import Persona from './persona';
-import './CSS/nav.css'
-import './CSS/demo_form.css'
-import './CSS/transition_tools.css'
-import './CSS/tools_homepage.css'
-import './CSS/dashboard.css'
-import './CSS/chart.css'
-import './CSS/persona.css'
+import CopyGenerator from './CopyGenerator';
+import './CSS/nav.css';
+import './CSS/demo_form.css';
+import './CSS/transition_tools.css';
+import './CSS/tools_homepage.css';
+import './CSS/dashboard.css';
+import './CSS/chart.css';
+import './CSS/persona.css';
+import './CSS/copy_generator.css';
 
 const root = ReactDOM.createRoot(document.getElementById('main_home'));
 root.render(
@@ -50,6 +52,9 @@ root.render(
             <Route path='/instagram' exact render={() => {
                 window.location.href = "https://www.instagram.com/";
             }}></Route>
+            <Route path='/copy_generator'>
+                <CopyGenerator></CopyGenerator>
+            </Route>
         </Switch>
     </Router>
 );
