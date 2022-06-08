@@ -9,6 +9,7 @@ import ToolHomePage from './ToolHomepage.js';
 import Dashboard from './Dashboard';
 import Persona from './persona';
 import CopyGenerator from './CopyGenerator';
+import ResultPage from './ResultPage';
 import './CSS/nav.css';
 import './CSS/demo_form.css';
 import './CSS/transition_tools.css';
@@ -17,6 +18,7 @@ import './CSS/dashboard.css';
 import './CSS/chart.css';
 import './CSS/persona.css';
 import './CSS/copy_generator.css';
+import './CSS/result_page.css'
 
 const root = ReactDOM.createRoot(document.getElementById('main_home'));
 root.render(
@@ -54,6 +56,9 @@ root.render(
             }}></Route>
             <Route path='/copy_generator'>
                 <CopyGenerator></CopyGenerator>
+            </Route>
+            <Route path='/results'>
+                <ResultPage></ResultPage>
             </Route>
         </Switch>
     </Router>

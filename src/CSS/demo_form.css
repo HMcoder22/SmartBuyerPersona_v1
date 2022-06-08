@@ -28,7 +28,7 @@
     width: 80%;
 }
 
-.form_wrapper, .tool_container, .persona_wrapper, .copy_generator_wrapper{
+.form_wrapper, .tool_container, .persona_wrapper, .copy_generator_wrapper, .result_page_wrapper{
     min-width: 800px;
     background-color: white;
     margin-left: 100px;

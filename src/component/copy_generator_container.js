@@ -3,15 +3,21 @@ import CheckBox from './checkbox';
 import InputType from './input_type';
 import SelectionBox from './selection_box';
 import { tone } from '../data/tone';
+import CopyContent from './copy_content';
+import { cwcontents } from '../data/copy_generator_written';
+import { chcontents } from '../data/copy_generator_hashtag';
+import { cgcontents } from '../data/copy_generator_graphics';
+
 
 class CopyGeneratorContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selected: {
-                input: {},
-                output: {}
-            },
+            max_contents: 5,
+            generated: false,
+            output: [],
+            product_or_services: {},
+            gch: {},
             checkbox_type: [{
                 type: 'checkbox',
                 id: 'product_checkbox',
@@ -80,14 +86,18 @@ class CopyGeneratorContainer extends Component {
 
     state = {  } 
     render() {
-        // Adding all the tones to the selection box's options
-        for(const element of tone){
-            this.state.selection_box.options.push({
-                value: element,
-                id: element,
-                placeholder: element,
-            })
+        if(this.state.selection_box.options.length === 0){
+            // Adding all the tones to the selection box's options
+            for(const element of tone){
+                this.state.selection_box.options.push({
+                    value: element,
+                    id: element,
+                    placeholder: element,
+                    key: element
+                })
+            }
         }
+        
         return (
             <div className='main_content'>
                 <div className='copy_generator_wrapper'>
@@ -118,11 +128,13 @@ class CopyGeneratorContainer extends Component {
                                     </li>
                                 </ul>
                             </ul>
-                            <div className='button_wrapper' id='generate_wrapper'><button className='button' type='submit' id='generate'>Generate</button></div>
+                            <div className='button_wrapper' id='generate_wrapper'><button className='button' type='submit' id='generate' onClick={() => this.handleGenerate()}>Generate</button></div>
                         </form>
                     </div>
                     <div className='output'>
-                        <div>
+                        <div className='result_window'>
+                            {this.state.output}
+                            <div className='button_wrapper' id='generate_more_wrapper'><button className='button' type='button' id='generate_more' onClick={() => this.handleMore()}>More</button></div>
                         </div>
                     </div>
                 </div>
@@ -130,6 +142,64 @@ class CopyGeneratorContainer extends Component {
         );
     }
 
+    // Generating content
+    generateContent(max_contents){
+        // Copy
+        if(this.state.gch.id === 'copy_checkbox' && this.state.gch.checked){
+            return cwcontents.map((items, key) => {
+                if(key < max_contents){
+                    return(
+                        <CopyContent {...items} key={key}></CopyContent>
+                    )
+                }
+                return(
+                    <React.Fragment key={key}></React.Fragment>
+                )
+            })
+        }
+        
+        // Hashtag
+        if(this.state.gch.id === 'hashtag_checkbox' && this.state.gch.checked){
+            return chcontents.map((items, key) => {
+                if(key < max_contents){
+                    return(
+                        <CopyContent {...items} key={key}></CopyContent>
+                    )
+                }
+                return(
+                    <React.Fragment key={key}></React.Fragment>
+                )
+            })
+        }
+
+        // Graphic
+        if(this.state.gch.id === 'graphic_checkbox' && this.state.gch.checked){
+            return cgcontents.map((items, key) => {
+                if(key < max_contents){
+                    return(
+                        <CopyContent {...items} key={key}></CopyContent>
+                    )
+                }
+                return(
+                    <React.Fragment key={key}></React.Fragment>
+                )
+            })
+        }
+
+        alert('Need to select one output type!');
+    }
+
+    // Handling generating function
+    handleGenerate(){
+        this.setState({max_contents: 5});
+        let copy_content = this.generateContent(5);
+        this.setState(prevState => ({
+            ...prevState,
+            output: copy_content
+        }))
+    }
+
+    // Handling product and services check box
     handleChange(event){
         // Switch flag checked in checkbox of the event
         this.setState(prevState => ({
@@ -152,15 +222,20 @@ class CopyGeneratorContainer extends Component {
             )  
         }))
 
-        this.setState({input: event.target});
+        this.setState({product_or_services: event.target});
         this.setState(prevState => ({
             input_type: {
                 ...prevState.input_type,
                 placeholder: (!event.target.checked) ? "Please select one of the two options!" : (event.target.id === 'product_checkbox') ? "Enter the product's description" : "Enter the service's description"
+            },
+            selection_box: {
+                ...prevState.selection_box,
+                options: []
             }
         }))
     }
 
+    // Handling selection for output type of graphics, tags, and copy
     handleSelect(event){
         // Switch flag checked in checkbox of the event
         this.setState(prevState => ({
@@ -182,11 +257,29 @@ class CopyGeneratorContainer extends Component {
                 o => (o.id !== event.target.id && !event.target.checked) ? {...o, disabled: false} : o
             )  
         }))
+
+        this.setState({gch: event.target})
     }
 
+    // Handling submission
     handleSubmit(event, url){
         alert("handdling submit");
+        if(!this.state.generated){
+            document.getElementsByClassName("result_window")[0].classList.toggle("active");
+            this.setState({generated: true});
+        }
         event.preventDefault();
+    }
+
+    // Increment the maximum contents the application can display
+    handleMore(){
+        if(this.state.max_contents < cwcontents.length)
+            this.setState({max_contents: this.state.max_contents + 5});
+        let copy_content = this.generateContent(this.state.max_contents + 5);
+        this.setState(prevState => ({
+            ...prevState,
+            output: copy_content
+        }))
     }
 }
  

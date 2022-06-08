@@ -92,21 +92,21 @@
     min-width: 400px;
 }
 
-#generate_wrapper{
+#generate_wrapper, #generate_more_wrapper{
     text-align: center;
     width: 100%;
     padding-top: 20px;
     padding-bottom: 10px;
 }
 
-#generate{
+#generate, #generate_more{
     height: 35px;
     border: 1px solid black;
     background-color: rgb(185, 185, 185, 0.15);
     box-shadow: 3px 3px 5px 0px rgb(0,0,0,0.25);
 }
 
-#generate:active{
+#generate:active, #generate_more:active{
     background-color: rgb(185, 185, 185, 0.65);
     box-shadow: 3px 3px 10px 0px rgb(0,0,0,0.35);;
 }
@@ -117,10 +117,66 @@
     width: 100%;
 }
 
-.output > p{
+.output > div{
+    text-align: center;
     width: 100%;
     height: auto;
     min-width: 500px;
     max-width: 900px;
     min-height: 400px;
+}
+
+.result_window{
+    margin: auto;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid lightgrey;
+    display: none;
+}
+
+.result_window.active{
+    display: block
+}
+
+.cph{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 20%;
+}
+
+.cph > li > div > img{
+    width: 30px;
+    height: 30px;
+    padding-right: 5px;
+}
+
+#written_text_content{
+    display: flex;
+}
+
+.copy_content{
+    padding: 0;
+    margin: 0;
+    text-align: start;
+}
+
+.copy_content_wrapper{
+    padding-bottom: 10px;
+    border-bottom: 1px dashed lightgrey;
+}
+
+.copy_content_wrapper:not(:first-of-type){
+    padding-top: 10px;
+}
+
+#hashtag_text_content{
+    justify-content: center;
+}
+
+#hashtag_text_content > .cph{
+    justify-content: center;
+    width: 100%;
+    padding-top: 10px;
+    
 }

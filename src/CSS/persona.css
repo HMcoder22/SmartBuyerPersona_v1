@@ -137,7 +137,7 @@
     padding-bottom: 23px;
 }
 
-p{
+.biography_wrapper > p{
     background-color: rgba(243, 243, 243, 0.877);
     padding: 10px 15px 10px 15px;
     box-shadow: 7px 7px 8px 0px rgb(0,0,0,0.25);
