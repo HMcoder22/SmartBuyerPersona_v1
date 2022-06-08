@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
 class PageNavigator extends Component {
     constructor(props){
         super(props);
@@ -9,24 +8,7 @@ class PageNavigator extends Component {
     }
     state = {  } 
     render() {
-        // let list_page = page_numbers.map((items, key) => {
-        //     if(this.props.current_page === key){
-        //         return(
-        //             <li className='page_number' id={items} key={key} onClick={this.props.onClick} style={{backgroundColor: "blue"}}>
-        //                 <Link to={'/results/page_number#' + items} id={items} onClick={this.props.onClick}>{items}</Link>
-        //             </li>
-        //         )
-        //     }
-        //     return(
-        //         <li className='page_number' id={items} key={key} onClick={this.props.onClick}>
-        //             <Link to={'/results/page_number#' + items} id={items} onClick={this.props.onClick}>{items}</Link>
-        //         </li>
-        //     )
-        // })
-
         let list_page = this.renderListPage();
-        console.log(list_page)
-
         return (
             <div className='page_number_wrapper'>
                 <ul>
@@ -45,7 +27,7 @@ class PageNavigator extends Component {
         if(this.state.max_display <= this.props.current_page + 1 && this.props.current_page <= this.props.page_numbers - this.state.max_display){
             list_page.push(
                 <li className='page_number' id={1} key={1} onClick={this.props.onClick}>
-                    <Link to={'/results/page_number#1'} id={1} onClick={this.props.onClick}>1</Link>
+                    <span id={1} onClick={this.props.onClick}>1</span>
                 </li>
             )
             list_page.push(
@@ -57,14 +39,14 @@ class PageNavigator extends Component {
                 if(i === this.props.current_page + 1){
                     list_page.push(
                         <li className='page_number' id={i} key={i} onClick={this.props.onClick} style={{backgroundColor: "blue"}}>
-                            <Link to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</Link>
+                            <span to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</span>
                         </li>
                     )
                     continue;
                 }
                 list_page.push(
                     <li className='page_number' id={i} key={i} onClick={this.props.onClick}>
-                        <Link to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</Link>
+                        <span to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</span>
                     </li>
                 )
             }
@@ -75,7 +57,7 @@ class PageNavigator extends Component {
             )
             list_page.push(
                 <li className='page_number' id={lastpage} key={lastpage} onClick={this.props.onClick}>
-                    <Link to={'/results/page_number#1'} id={lastpage} onClick={this.props.onClick}>{lastpage}</Link>
+                    <span to={'/results/page_number#1'} id={lastpage} onClick={this.props.onClick}>{lastpage}</span>
                 </li>
             )
             return list_page;
@@ -88,14 +70,14 @@ class PageNavigator extends Component {
                 if(i === this.props.current_page + 1){
                     list_page.push(
                         <li className='page_number' id={i} key={i} onClick={this.props.onClick} style={{backgroundColor: "blue"}}>
-                            <Link to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</Link>
+                            <span to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</span>
                         </li>
                     )
                     continue;
                 }
                 list_page.push(
                     <li className='page_number' id={i} key={i} onClick={this.props.onClick}>
-                        <Link to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</Link>
+                        <span to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</span>
                     </li>
                 )
             }
@@ -106,7 +88,7 @@ class PageNavigator extends Component {
             )
             list_page.push(
                 <li className='page_number' id={lastpage} key={lastpage} onClick={this.props.onClick}>
-                    <Link to={'/results/page_number#' + this.props.page_numbers} id={lastpage} onClick={this.props.onClick}>{lastpage}</Link>
+                    <span to={'/results/page_number#' + this.props.page_numbers} id={lastpage} onClick={this.props.onClick}>{lastpage}</span>
                 </li>
             )
             return list_page;
@@ -117,7 +99,7 @@ class PageNavigator extends Component {
         if(this.props.current_page + 1 > this.props.page_numbers - this.state.max_display){
             list_page.push(
                 <li className='page_number' id={1} key={1} onClick={this.props.onClick}>
-                    <Link to={'/results/page_number#1'} id={1} onClick={this.props.onClick}>1</Link>
+                    <span to={'/results/page_number#1'} id={1} onClick={this.props.onClick}>1</span>
                 </li>
             )
             list_page.push(
@@ -129,14 +111,14 @@ class PageNavigator extends Component {
                 if(i === this.props.current_page + 1){
                     list_page.push(
                         <li className='page_number' id={i} key={i} onClick={this.props.onClick} style={{backgroundColor: "blue"}}>
-                            <Link to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</Link>
+                            <span to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</span>
                         </li>
                     )
                     continue;
                 }
                 list_page.push(
                     <li className='page_number' id={i} key={i} onClick={this.props.onClick}>
-                        <Link to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</Link>
+                        <span to={'/results/page_number#' + i} id={i} onClick={this.props.onClick}>{i}</span>
                     </li>
                 )
             }
