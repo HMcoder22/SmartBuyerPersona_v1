@@ -7,6 +7,7 @@ import Arrow from '../CSS/img/arrow.png';
 import Chart from '../CSS/img/chart.png';
 import Tools from '../CSS/img/tools.png';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class DemoForm extends Component {
     constructor(props){
@@ -16,30 +17,33 @@ class DemoForm extends Component {
             age: 0,
             occupation: '',
             country: '',
-            states: '',
+            state: '',
+            redirect: false,
             input_type: [{
                 type: 'text',
                 placeholder: "Enter the prospect's age",
-                id: 'age'
+                id: 'age',
+                name: 'age'
             },
             {
                 type: 'text',
                 placeholder: "Enter zipcode",
-                id: 'zipcode'
-
+                id: 'zipcode',
+                name: 'zipcode'
             }],
 
             selection_box: [
             {
                 id: 'gender',
                 placeholder: 'Select Gender',
+                name: 'gender',
                 options: [{
-                    value: 'male',
+                    value: 'Male',
                     id: 'male',
                     placeholder: 'Male'
                 },
                 {
-                    value: 'female',
+                    value: 'Female',
                     id: 'female',
                     placeholder: 'Female'
                 }]
@@ -47,20 +51,23 @@ class DemoForm extends Component {
             {
                 id: 'country',
                 placeholder: 'Select Country',
+                name: 'country',
                 options: [{
-                    value: 'usa',
+                    value: 'USA',
                     id: 'usa',
-                    placeholder: 'United States'
+                    placeholder: 'United States',
                 }]
             },
             {
-                id: 'states',
-                placeholder: 'Select States',
+                id: 'state',
+                placeholder: 'Select State',
+                name: 'state',
                 options: []
             },
             {
                 id: 'occupation',
                 placeholder: 'Select occupation',
+                name: 'occupation',
                 options: []
             }],
 
@@ -92,7 +99,9 @@ class DemoForm extends Component {
     }
 
     render() {
-        /**Getting all states from usa to add to options */
+        if(this.state.redirect){ 
+            return <Redirect to={'/persona'}></Redirect>;
+        }
         let json_file = require('../datasets/states_occupation.json');
         if(this.state.selection_box[2].options.length === 0){
             for(const element of json_file){
@@ -112,7 +121,8 @@ class DemoForm extends Component {
                     value: element.state,
                     id: element.state,
                     placeholder: state_name,
-                    key: element.state_name
+                    key: element.state_name,
+                    name: 'state'
                 })
             }
             
@@ -121,7 +131,8 @@ class DemoForm extends Component {
                     value: element.job,
                     id: element.job,
                     placeholder: element.job,
-                    key: element.job
+                    key: element.job,
+                    name: 'occupation'
                 })
             }
         }
@@ -184,19 +195,26 @@ class DemoForm extends Component {
 
     handleSubmit(event){
         event.preventDefault();
-        console.log(this.state);
-        axios
-            .post("http://localhost:3000/home", this.state)
-            .then(response => {
-                console.log(response);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        axios.post("http://localhost:4000/api", this.state)
+        .then(res => {
+            const {gender, age, country, state, occupation} = res.data;
+            console.log(state);
+            sessionStorage.setItem('persona', JSON.stringify({
+                gender: gender, 
+                age: age, 
+                country: country, 
+                state: state, 
+                occupation: occupation
+            }));
+            this.setState({redirect: true});
+        }).catch(err =>{
+            console.log(err);
+        })
     }
 
     handleChange(e){
-        this.setState({[e.target.id]: e.target.value});
+        console.log(e.target.name);
+        this.setState({[e.target.name]: e.target.value});
     }
 }
  
