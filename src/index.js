@@ -24,7 +24,7 @@ const root = ReactDOM.createRoot(document.getElementById('main_home'));
 root.render(
     <Router>
         <Switch>
-            <Route path={['/', '/home','/billtrancon12/SmartBuyerPersonaReact.git']} exact>
+            <Route path={['/', '/home','/billtrancon12/SmartBuyerPersonaReact.git', '/billtrancon12/SmartBuyerPersonaReact.git/home']} exact>
                 <App></App>
             </Route>
             <Route path='/product_form' exact>

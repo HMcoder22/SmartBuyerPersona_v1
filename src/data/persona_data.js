@@ -17,7 +17,7 @@ export const persona = {
     },
     {
         type: 'Occupation:',
-        value: 'Job title'
+        value: 'Mining, quarrying, and oil and gas extraction'
     },
     {
         type: 'Family:',
