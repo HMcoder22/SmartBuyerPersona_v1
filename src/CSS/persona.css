@@ -1,0 +1,211 @@
+#profile_wrapper > .label_wrapper{
+    padding: 0;
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.persona_wrapper > ul{
+    display: flex;
+    width: 100%;
+}
+
+.img_wrapper > img{
+    width: 150px;
+    height: 150px;
+}
+
+#profile_img_wrapper{
+    margin-bottom: 10px;
+}
+
+#persona_wrapper_left, #persona_wrapper_middle, #persona_wrapper_right{
+    height: auto;
+}
+
+#persona_wrapper_left{
+    width: 28%;
+    padding-left: 20px;
+}
+
+#persona_wrapper_middle, #persona_wrapper_right{
+    width: 36%;
+}
+
+#profile_wrapper{
+    width: 54%;
+    text-align: center;
+}
+
+.traits_wrapper{
+    display: inline-block;
+    width: 270px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+
+.traits_wrapper > li{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 20px;
+    width: auto;
+    display: inline-block;
+    text-align: center;
+    background-color: rgba(189, 189, 189, 0.151);
+    border: 1px solid black;
+    box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.3);
+}
+
+.traits_wrapper > li > div{
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.bio_value{
+    padding-left: 7px;
+}
+
+.bio_type{
+    color: rgba(11, 14, 212, 0.945);
+    font-weight: bold;
+
+}
+
+#bio_details_wrapper > ul{
+    padding: 0;
+    margin: 0;
+    margin-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid black;
+}
+
+#bio_details_wrapper{
+    min-width: 386px;
+    max-width: 386px;
+}
+
+.social_wrapper > .label_wrapper, .analytic_wrapper > .label_wrapper, .bio_wrapper > .label_wrapper{
+    padding: 0;
+    margin: 0;
+}
+
+.social > a > img{
+    width: 50px;
+    height: 50px;
+}
+
+#Facebook{
+    width: 55px;
+}
+
+.utility_wrapper{
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.utility_wrapper > div{
+    text-align: center;
+}
+
+#analytics_img{
+    width: 140px;
+    height: 110px;
+}
+
+.social > a{
+    color: blue;
+    font-size: large;
+    text-decoration: none;
+}
+
+.bio_wrapper > .label_wrapper{
+    text-align: center;
+    font-size: 28px;
+    min-width: 428px;
+    max-width: 428px;
+}
+
+.persona_wrapper > ul{
+    padding: 0;
+    margin: 0;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-bottom: 23px;
+}
+
+.biography_wrapper > p{
+    background-color: rgba(243, 243, 243, 0.877);
+    padding: 10px 15px 10px 15px;
+    box-shadow: 7px 7px 8px 0px rgb(0,0,0,0.25);
+    min-width: 400px;
+    max-width: 400px;
+}
+
+#persona_wrapper_middle > .chart_info_wrapper, #persona_wrapper_right > .chart_info_wrapper{
+    min-width: 450px;
+    max-width: 450px;
+    min-height: 350px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    padding-top: 10px;
+    color: rgba(124, 124, 124, 0.849);
+    margin-right: 20px;
+}
+
+#persona_wrapper_middle > .chart_info_wrapper > .chart_label_wrapper > span, #persona_wrapper_right > .chart_info_wrapper > .chart_label_wrapper > span{
+    font-weight: normal;
+}
+
+#persona_wrapper_middle > .chart_info_wrapper > .chart_wrapper{
+    min-height: 300px;
+}
+
+#persona_wrapper_right > .chart_info_wrapper > .chart_wrapper{
+    min-height: 300px;
+}
+
+.goal_wrapper > ul, .challenge_wrapper > ul{
+    padding: 0;
+    margin: 0;
+}
+
+.goal_wrapper > span, .challenge_wrapper > span{
+    display: block;
+    font-weight: normal;
+}
+
+.goal_wrapper > ul > li > label, .challenge_wrapper > ul > li > label{
+    font-weight: lighter
+}
+
+.goal_wrapper > ul > li, .challenge_wrapper > ul > li{
+    list-style-type: disc;
+}
+
+.goal_wrapper, .challenge_wrapper{
+    background-color: lightyellow;
+    width: 60%;
+    text-align: center;
+    margin-left: 60px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 5px 5px 7px 0px rgba(65, 64, 64, 0.57);
+    height: auto;
+    overflow-y: auto;
+    max-height: 200px;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+#persona_header,  #persona_footer, #persona_wrapper{
+    min-width: 1660px;
+}
+
