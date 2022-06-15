@@ -7,6 +7,7 @@ import Arrow from '../CSS/img/arrow.png';
 import Chart from '../CSS/img/chart.png';
 import Tools from '../CSS/img/tools.png';
 import axios from 'axios';
+import {Navigate} from 'react-router-dom'
 
 class DemoForm extends Component {
     constructor(props){
@@ -98,6 +99,10 @@ class DemoForm extends Component {
     }
 
     render() {
+        if(this.state.redirect){
+            return <Navigate to='/persona'></Navigate>
+        }
+
         let json_file = require('../datasets/states_occupation.json');
         if(this.state.selection_box[2].options.length === 0){
             for(const element of json_file){
@@ -191,21 +196,43 @@ class DemoForm extends Component {
 
     handleSubmit(event){
         event.preventDefault();
-        axios.post("http://localhost:4000/api", this.state)
+        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/api", this.state)
         .then(res => {
-            const {gender, age, country, state, occupation} = res.data;
-            console.log(state);
-            sessionStorage.setItem('persona', JSON.stringify({
-                gender: gender, 
-                age: age, 
-                country: country, 
-                state: state, 
-                occupation: occupation
-            }));
-            this.setState({redirect: true});
+            // Successfully validating the data
+            console.log(res.data);
+            if(res.data.error === undefined){     
+                const {gender, age, country, state, occupation} = res.data;
+                sessionStorage.setItem('persona', JSON.stringify({
+                    gender: gender, 
+                    age: age, 
+                    country: country, 
+                    state: state, 
+                    occupation: occupation
+                }));
+                this.setState({redirect: true});
+            }
+            // Data is not good -> display error according
+            else{
+                this.displayErr(res.data);
+            }
         }).catch(err =>{
             console.log(err);
         })
+    }
+
+    displayErr(e){
+        if(e.error === 'empty_gender'){
+            alert('Please select one of the gender!');
+            return;
+        }
+        if(e.error === 'empty_age_and_occupation'){
+            alert('Please at least fill in age or select occupation!');
+            return;
+        }
+        if(e.error === 'empty_location'){
+            alert("Please select country and state/province");
+            return;
+        }
     }
 
     handleChange(e){
