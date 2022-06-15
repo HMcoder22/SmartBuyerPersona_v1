@@ -7,7 +7,6 @@ import Arrow from '../CSS/img/arrow.png';
 import Chart from '../CSS/img/chart.png';
 import Tools from '../CSS/img/tools.png';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 class DemoForm extends Component {
     constructor(props){
@@ -99,9 +98,6 @@ class DemoForm extends Component {
     }
 
     render() {
-        if(this.state.redirect){ 
-            return <Redirect to={'/persona'}></Redirect>;
-        }
         let json_file = require('../datasets/states_occupation.json');
         if(this.state.selection_box[2].options.length === 0){
             for(const element of json_file){
