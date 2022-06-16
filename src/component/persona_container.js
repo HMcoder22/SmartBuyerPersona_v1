@@ -9,25 +9,13 @@ import ProfileImg from '../CSS/img/profile_img.jpg';
 import Facebook from '../CSS/img/facebook_icon.png';
 import Instagram from '../CSS/img/insta_icon.png';
 import Twitter from '../CSS/img/twitter.png';
-
+import { goals_and_challenges } from '../data/goals_and_challenges';
 
 class PersonaContainer extends Component {
     constructor(props){
         super(props);
         const persona_info = JSON.parse(sessionStorage.getItem('persona'));
-        const state_occupation = require('../datasets/states_occupation.json');
-        
-        let income = 0;
-        for(let i = 0; i < state_occupation.length; i++){
-            if(state_occupation[i].state === persona_info.state){
-                for(let j = 0; j < state_occupation[i].occupation.length; j++){
-                    if(state_occupation[i].occupation[j].job === persona_info.occupation){
-                        income = state_occupation[i].occupation[j].income;
-                    }
-                }
-            }
-        }
- 
+
         this.state = {
             name: 'Jimmy',
             img: ProfileImg,
@@ -54,7 +42,7 @@ class PersonaContainer extends Component {
             },
             {
                 type: 'Income:',
-                value: income
+                value: persona_info.income
             }],
             social: [{
                 img: Facebook,
@@ -92,8 +80,16 @@ class PersonaContainer extends Component {
                 },
                 label: 'Preferred Channel'
             },
-            goals: ["Goal 1", "Goal 2", "Goal 3"],
-            challenges: ["Challenges 1", "Challenges 2", "Challenges 3", "Challenges 4"],
+            goals: [
+                "Goal 1", 
+                "Goal 2", 
+                "Goal 3"],
+            challenges: [
+                "Challenges 1", 
+                "Challenges 2", 
+                "Challenges 3", 
+                "Challenges 4"
+            ],
             motivation: {
                 type: "bar",
                 data: {
@@ -113,6 +109,14 @@ class PersonaContainer extends Component {
                     responsive: true
                 },
                 label: 'Motivation'
+            }
+        }
+
+        for(const element of goals_and_challenges){
+            if(element.occupation === persona_info.occupation){
+                this.state.goals = element.goals;
+                this.state.challenges = element.challenges;
+                this.state.biography = element.biography;
             }
         }
     }

@@ -151,27 +151,27 @@ class DemoForm extends Component {
                         <ul>
                             <li className='first-item'>
                                 <div>
-                                    <label className='label' id='gender_label'>Gender</label>
+                                    <label className='label' id='gender_label'>Gender</label><span className='asterisk'>*</span>
                                     <SelectionBox {...this.state.selection_box[0]} onChange={(e) => this.handleChange(e)}></SelectionBox>
                                 </div>
                             </li>
                             <li className='middle-item'>
                                 <div>
-                                    <label className='label' id='age_label'>Age</label>
+                                    <label className='label' id='age_label'>Age</label><span className='asterisk'>*</span>
                                     <InputType {...this.state.input_type[0]} onChange={(e) => this.handleChange(e)}/>                                    
                                 </div>
                                 <div>
-                                    <label className='label' id='occupation'>Occupation</label>
+                                    <label className='label' id='occupation'>Occupation</label><span className='asterisk'>*</span>
                                     <SelectionBox {...this.state.selection_box[3]} onChange={(e) => this.handleChange(e)}></SelectionBox>
                                 </div>
                             </li>
                             <li className='last-items'>
                                 <div>
-                                    <label className='label' id='country_label'>Country</label>
+                                    <label className='label' id='country_label'>Country</label><span className='asterisk'>*</span>
                                     <SelectionBox {...this.state.selection_box[1]} onChange={(e) => this.handleChange(e)}></SelectionBox>
                                 </div>
                                 <div>
-                                    <label className='label' id='state_label'>State/Province</label>
+                                    <label className='label' id='state_label'>State/Province</label><span className='asterisk'>*</span>
                                     <SelectionBox {...this.state.selection_box[2]} onChange={(e) => this.handleChange(e)}></SelectionBox>
                                 </div>
                                 <div>
@@ -197,17 +197,19 @@ class DemoForm extends Component {
     handleSubmit(event){
         event.preventDefault();
         axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/api", this.state)
+        // axios.post("http://localhost:4000/api", this.state)
         .then(res => {
             // Successfully validating the data
             console.log(res.data);
             if(res.data.error === undefined){     
-                const {gender, age, country, state, occupation} = res.data;
+                const {gender, age, country, state, occupation, income} = res.data;
                 sessionStorage.setItem('persona', JSON.stringify({
                     gender: gender, 
                     age: age, 
                     country: country, 
                     state: state, 
-                    occupation: occupation
+                    occupation: occupation,
+                    income: income
                 }));
                 this.setState({redirect: true});
             }
@@ -225,13 +227,23 @@ class DemoForm extends Component {
             alert('Please select one of the gender!');
             return;
         }
-        if(e.error === 'empty_age_and_occupation'){
-            alert('Please at least fill in age or select occupation!');
+        if(e.error === 'empty_age'){
+            alert('Please fill in age');
+            return;
+        }
+        if(e.error === 'empty_occupation'){
+            alert('Please select one of the occupation');
             return;
         }
         if(e.error === 'empty_location'){
             alert("Please select country and state/province");
             return;
+        }
+        if(e.error === 'invalid_age'){
+            alert("Please enter a numeric age ranging from 16-100");
+        }
+        if(e.error === 'job_unavailable'){
+            alert("The data for " + e.occupation + " is unavailable for " + e.state + "\nPlease choose another occupation!");
         }
     }
 

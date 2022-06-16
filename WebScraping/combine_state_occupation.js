@@ -4,6 +4,7 @@ const Arizona = require('./Arizona_occupation.json');
 const Alaska = require('./Alaska_occupation.json');
 const Colorado = require('./Colorado_occupation.json');
 const Connecticut = require('./Connecticut_occupation.json');
+const California = require('./California_occupation.json');
 const Delaware = require('./Delaware_occupation.json');
 const District_of_Columbia = require('./District_of_Columbia_occupation.json');
 const Florida = require('./Florida_occupation.json');
@@ -61,6 +62,7 @@ states.push(Arkansas);
 states.push(Alaska);
 states.push(Colorado);
 states.push(Connecticut);
+states.push(California);
 states.push(Delaware);
 states.push(District_of_Columbia);
 states.push(Florida);
@@ -112,7 +114,7 @@ states.push(Wyoming);
 
 const result = JSON.stringify(states);
 
-fs.writeFile("./states_occupation.json", result, (err) => {
+fs.writeFile("../src/datasets/states_occupation.json", result, (err) => {
     if(err)
         console.log(err);
 })

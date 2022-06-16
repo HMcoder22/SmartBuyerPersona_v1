@@ -110,3 +110,10 @@ span, p{
 ul > li{
     list-style-type: none;
 }
+
+.asterisk{
+    color: red;
+    font-size: large;
+    font-weight: bold;
+    padding-left: 2px;
+}
