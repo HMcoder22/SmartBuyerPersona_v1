@@ -227,8 +227,8 @@ class DemoForm extends Component {
 
     handleSubmit(event){
         event.preventDefault();
-        // axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/api", this.state)
-        axios.post("http://localhost:4000/api", this.state)
+        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/api", this.state)
+        // axios.post("http://localhost:4000/api", this.state)
         .then(res => {
             // Successfully validating the data
             console.log(res.data);
