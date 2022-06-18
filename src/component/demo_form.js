@@ -16,8 +16,9 @@ class DemoForm extends Component {
             gender: '',
             age: 0,
             occupation: '',
+            industry: '',
             country: '',
-            state: '',
+            state: 'Alabama',
             redirect: false,
             input_type: [{
                 type: 'text',
@@ -69,6 +70,11 @@ class DemoForm extends Component {
                 placeholder: 'Select occupation',
                 name: 'occupation',
                 options: []
+            },{
+                id: 'industry',
+                placeholder: 'Select Industry',
+                name: 'industry',
+                options: []
             }],
 
             transition_tools: [{
@@ -103,7 +109,9 @@ class DemoForm extends Component {
             return <Navigate to='/persona'></Navigate>
         }
 
-        let json_file = require('../datasets/states_occupation.json');
+        let json_file = require('../datasets/states_occupations_no_income.json');
+        let industry = require('../datasets/industry.json');
+
         if(this.state.selection_box[2].options.length === 0){
             for(const element of json_file){
                 const state_name_arr = element.state.split("_");
@@ -126,17 +134,36 @@ class DemoForm extends Component {
                     name: 'state'
                 })
             }
-            
-            for(const element of json_file[0].occupation){
-                this.state.selection_box[3].options.push({
-                    value: element.job,
-                    id: element.job,
-                    placeholder: element.job,
-                    key: element.job,
-                    name: 'occupation'
+        }
+
+        if(this.state.selection_box[3].options.length === 0){
+            for(const element of json_file){
+                if(element.state === this.state.state){
+                    for(const occupation of element.occupation){
+                        this.state.selection_box[3].options.push({
+                            value: occupation,
+                            id: occupation,
+                            placeholder: occupation,
+                            key: occupation
+                        })
+                    }
+                }
+            }
+        }
+
+        if(this.state.selection_box[4].options.length === 0){
+            for(const element of industry){
+                this.state.selection_box[4].options.push({
+                    value: element.industry,
+                    id: element.industry,
+                    placeholder: element.industry,
+                    key: element.industry,
                 })
             }
         }
+
+        // Sorting ascending manner according to the first character of the job
+        this.state.selection_box[3].options.sort((a,b) => a.value.charCodeAt(0) - b.value.charCodeAt(0))
 
 
 
@@ -159,6 +186,10 @@ class DemoForm extends Component {
                                 <div>
                                     <label className='label' id='age_label'>Age</label><span className='asterisk'>*</span>
                                     <InputType {...this.state.input_type[0]} onChange={(e) => this.handleChange(e)}/>                                    
+                                </div>
+                                <div>
+                                    <label className='label' id='industry'>Industry</label>
+                                    <SelectionBox {...this.state.selection_box[4]} onChange={(e) => this.handleChange(e)}></SelectionBox>
                                 </div>
                                 <div>
                                     <label className='label' id='occupation'>Occupation</label><span className='asterisk'>*</span>
@@ -196,8 +227,8 @@ class DemoForm extends Component {
 
     handleSubmit(event){
         event.preventDefault();
-        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/api", this.state)
-        // axios.post("http://localhost:4000/api", this.state)
+        // axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/api", this.state)
+        axios.post("http://localhost:4000/api", this.state)
         .then(res => {
             // Successfully validating the data
             console.log(res.data);
@@ -248,8 +279,65 @@ class DemoForm extends Component {
     }
 
     handleChange(e){
-        console.log(e.target.name);
         this.setState({[e.target.name]: e.target.value});
+
+        if(e.target.id === 'state'){
+            this.setState(prevState => ({
+                selection_box: prevState.selection_box.map(
+                    o => (o.id === 'occupation') ? {...o, options: []} : o
+                )
+            }))
+        }
+
+        if(e.target.id === 'industry'){
+            this.sortOccupationByIndustry(e);
+        }
+    }
+
+    sortOccupationByIndustry(e){
+        if(e.target.value === "" || e.target.value === "None"){
+            this.setState(prevState => ({
+                selection_box: prevState.selection_box.map(
+                    o => (o.id === 'occupation') ? {...o, options: []} : o
+                )
+            }))
+            return;
+        }
+
+        const state_occupation = require('../datasets/states_occupations_no_income.json');
+        const industry_list = require('../datasets/industry.json');
+        let industryIndex = 0;
+        const sorted = [];
+
+        while(industryIndex < industry_list.length && industry_list[industryIndex++].industry !== e.target.value);
+
+
+        for(const element of state_occupation){
+            if(element.state === this.state.state){
+                for(const occupation of element.occupation){
+                    for(const key of industry_list[((industryIndex > 0) ? industryIndex - 1: 0)].key){
+                        if(occupation.toUpperCase().includes(key)){
+                            sorted.push({
+                                value: occupation,
+                                id: occupation,
+                                placeholder: occupation,
+                                key: occupation
+                            })
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+
+        this.setState(prevState => ({
+            selection_box: prevState.selection_box.map(
+                o => (o.id === 'occupation') ? {...o, options: sorted} : o
+            )
+        }))
+
     }
 }
  

@@ -20,6 +20,7 @@ import './CSS/persona.css';
 import './CSS/copy_generator.css';
 import './CSS/result_page.css'
 
+
 const root = ReactDOM.createRoot(document.getElementById('main_home'));
 root.render(
     <Router>
@@ -32,15 +33,16 @@ root.render(
             </Route>
             <Route path='/product_form' exact element={<ProductFormPage></ProductFormPage>}>
             </Route>
-            <Route path='/contact' exact render={() =>{
-                window.location.href= "https://smartbuyerpersona.com/about-us";
-            }}></Route>
-            <Route path='/about-us' exact render={() =>{
+            {/* <Route path='/contact' exact element={()=>{
+                window.location.href = "https://smartbuyerpersona.com/";
+                return null;
+            }}></Route> */}
+            {/* <Route path='/about-us' exact render={() =>{
                 window.location.href= "https://smartbuyerpersona.com/about-us";
             }}></Route>
             <Route path='/homepage' exact render={() =>{
                 window.location.href = "https://smartbuyerpersona.com";
-            }}></Route>
+            }}></Route> */}
             <Route path='/tool_homepage' exact element={<ToolHomePage></ToolHomePage>}>
             </Route>
             <Route path='/dashboard' exact element={<Dashboard></Dashboard>}>

@@ -1,0 +1,55 @@
+[{
+    "industry" :"None",
+    "key": []
+},
+{
+    "industry": "Manager",
+    "key": ["MANAGER"]
+},
+{
+    "industry": "Engineer",
+    "key": ["ENGINEER", "ENGINEERING", "DATABASE"]
+},
+{
+    "industry": "Technician",
+    "key": ["TECHNICIAN"]
+},{
+    "industry": "Officer",
+    "key": ["OFFICER"]
+},{
+    "industry": "Scientist",
+    "key": ["SCIENTIST"]
+},{
+    "industry": "Education",
+    "key": ["SCHOOL", "EDUCATION", "EDUCATIONAL", "EDUCATOR", "TEACHER", "PROFESSOR", "TUTORS", "TEACHING"]
+},{
+    "industry": "Specialist",
+    "key": ["SPECIALIST"]
+},{
+    "industry": "Computer",
+    "key": ["COMPUTER", "NETWORK", "DATABASE", "SOFTWARE", "HARDWARE", "COMPUTING", "DEVELOPER", "PROGRAMMER", "CODE", "CODING", "STATISTIC", "STATISTICIAN"]
+},{
+    "industry": "Biological",
+    "key": ["BIOLOGICAL", "BIOLOGY", "BIO"]
+},{
+    "industry": "Repairer",
+    "key": ["REPAIRER", "MAINTENANCE"]
+},{
+    "industry": "Animal",
+    "key": ["ANIMAL", "PET ", "VET ", "CAT " ,"DOG "]
+},{
+    "industry": "Business",
+    "key": ["BUSINESS", "ACCOUNTING", "ACCOUNTANT", "SELLER", "RETAIL", "BUYER", "INVESTMENT", "INVESTOR", "FINANCE", "FINANCIAL", "MARKETING", "ADVERTISE", "ADVERTISING", "PROMOTION", "ECONOMIC", "ECONOMICAL", "ECONOMIST"]
+},{
+    "industry": "Counselor and mediator",
+    "key": ["COUNSELOR", "MEDIATOR", "THERAPIST", "COUNSELING"]
+},{
+    "industry": "Entertainment",
+    "key": ["DANCER", "SINGER", "ENTERTAINMENT", "ENTERTAINING", "RECREATION", "GAMBLING", "MEDIA", "THEATER", "THEATRICAL", "HOST", "PARTY", "GAME", "MUSIC", "WRITER", "LITERATURE", "EDITORS"]
+},{
+    "industry": "Medical and hospital",
+    "key": ["MEDICAL", "HOSPITAL", "EMERGENCY", "DOCTOR", "MEDICINE", "LAB", "NURSE", "CARE", "CARETAKER", "HOSPITALITY", "SURGEON", "THERAPIST"]
+},{
+    "industry": "Electrical",
+    "key": ["ELECTRICAL", "ELECTRICITY", "ELECTRICIAN", "ELECTRIC", "ELECTRONIC", "MACHINE", "ENGINE"]
+}]

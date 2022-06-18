@@ -11,9 +11,14 @@ class  Nav extends Component {
                         <Navbar value="SmartBuyerPersona" id="smart_buyer_persona" url="/"/>
                     </li>
                     <li>
-                        <Navbar value="Home" id="home" url="/homepage"/>
-                        <Navbar value="About" id="about" url="/about-us"/>
-                        <Navbar value="Contact" id="contact" url="/contact"/>
+                        <div className='nav-items'>
+                            <a href="https://smartbuyerpersona.com/">Home</a>
+                        </div>
+                        <div className='nav-items'>
+                            <a href="https://smartbuyerpersona.com/about-us">About</a>
+                        </div>                        <div className='nav-items'>
+                            <a href="https://smartbuyerpersona.com/about-us">Contact</a>
+                        </div>
                     </li>
                 </ul>
             </nav>
