@@ -20,6 +20,7 @@ class PersonaContainer extends Component {
         Chart.register(ChartDataLabels);
 
         this.state = {
+            analytics_hidden: true,
             name: 'Jimmy',
             img: ProfileImg,
             traits: ['Hard-working', 'Motivated', 'Extrovert', 'Social', 'Dominant', "Loved"],
@@ -316,8 +317,8 @@ class PersonaContainer extends Component {
                             <PersonaBioDetails bios={this.state.bios}></PersonaBioDetails>
                             <ul className='utility_wrapper'>
                                 <div className='analytic_wrapper'>
-                                    <div className='label_wrapper' href='#' onClick={(e) => this.openAnalytics(e)}><label href='#' onClick={(e) => this.openAnalytics(e)} className='label' id='analytics_wrapper'>Analytics</label></div>
-                                    <div className='img_wrapper' href='#' onClick={(e) => this.openAnalytics(e)}><img href='#' onClick={(e) => this.openAnalytics(e)} className='img' id='analytics_img' src={Analytics} alt='pie_icon'></img></div>
+                                    <div className='label_wrapper'><label className='label' id='analytics_wrapper'>Analytics</label></div>
+                                    <div className='img_wrapper' href='#' onClick={(e) => this.openAnalytics(e)}><img className='img' id='analytics_img' src={Analytics} alt='pie_icon'></img></div>
                                 </div>
                                 <Social social={this.state.social}></Social>
                             </ul>
@@ -362,10 +363,14 @@ class PersonaContainer extends Component {
     }
 
     closeAnalytics(){
-        const analytics_wrapper = document.getElementsByClassName('Analytics_container_wrapper')[0];
-        const exit_button = document.getElementsByClassName('exit_button')[0];
-        analytics_wrapper.classList.toggle('active');
-        exit_button.classList.toggle('active');
+        // Only able to close when the analytics window is open
+        if(!this.state.analytics_hidden){
+            const analytics_wrapper = document.getElementsByClassName('Analytics_container_wrapper')[0];
+            const exit_button = document.getElementsByClassName('exit_button')[0];
+            analytics_wrapper.classList.toggle('active');
+            exit_button.classList.toggle('active');
+            this.setState({analytics_hidden: true});
+        }
     }
 
     openAnalytics(e){
@@ -374,7 +379,8 @@ class PersonaContainer extends Component {
             const exit_button = document.getElementsByClassName('exit_button')[0];
             analytics_wrapper.classList.toggle('active');
             exit_button.classList.toggle('active');
-        }
+            this.setState({analytics_hidden: !this.state.analytics_hidden})
+        }       
     }
 }
  
