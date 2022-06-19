@@ -231,7 +231,6 @@ class DemoForm extends Component {
         // axios.post("http://localhost:4000/api", this.state)
         .then(res => {
             // Successfully validating the data
-            console.log(res.data);
             if(res.data.error === undefined){     
                 const {gender, age, country, state, occupation, income} = res.data;
                 sessionStorage.setItem('persona', JSON.stringify({

@@ -10,11 +10,14 @@ import Facebook from '../CSS/img/facebook_icon.png';
 import Instagram from '../CSS/img/insta_icon.png';
 import Twitter from '../CSS/img/twitter.png';
 import { goals_and_challenges } from '../data/goals_and_challenges';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart } from 'chart.js';
 
 class PersonaContainer extends Component {
     constructor(props){
         super(props);
         const persona_info = JSON.parse(sessionStorage.getItem('persona'));
+        Chart.register(ChartDataLabels);
 
         this.state = {
             name: 'Jimmy',
@@ -68,7 +71,7 @@ class PersonaContainer extends Component {
                         label: "Preferred Channeled",
                         data: [860, 782, 421, 892, 1371],
                         borderColor: "red",
-                        backgroundColor: "darkblue"
+                        backgroundColor: ["lightblue", "#ffcccb", "lightgreen", "lightyellow", "#CBC3E3"]
                     }],
                 },
                 options: {
@@ -76,7 +79,12 @@ class PersonaContainer extends Component {
                         display: true,
                     },
                     maintainAspectRatio: false,
-                    responsive: true
+                    responsive: true,
+                    plugins:{
+                        datalabels: {
+                            color: "black"
+                        }
+                    },
                 },
                 label: 'Preferred Channel'
             },
@@ -93,12 +101,12 @@ class PersonaContainer extends Component {
             motivation: {
                 type: "bar",
                 data: {
-                    labels: ["Money", "Quality", "Model/Fashion", "Quality", "Quantity", "Brand"],
+                    labels: ["Money", "Quality", "Model/Fashion", "Quantity", "Brand"],
                     datasets: [{ 
-                        label: "Motivation",
-                        data: [782, 671, 879, 523, 982, 582],
+                        label: ["Motivation"],
+                        data: [782, 671, 879, 982, 582],
                         borderColor: "red",
-                        backgroundColor: "darkblue"
+                        backgroundColor: ["lightblue", "#ffcccb", "lightgreen", "lightyellow", "#CBC3E3"]
                     }],
                 },
                 options: {
@@ -106,9 +114,159 @@ class PersonaContainer extends Component {
                         display: true,
                     },
                     maintainAspectRatio: false,
-                    responsive: true
+                    responsive: true,
+                    plugins:{
+                        datalabels: {
+                            color: "black"
+                        }
+                    },
                 },
+
                 label: 'Motivation'
+            },
+            shop_method: {
+                type: "pie",
+                data: {
+                    labels: ["In person", "Online", "Curbside", "Delivery"],
+                    datasets:[{
+                        labels: ["In person", "Online", "Curbside", "Delivery"],
+                        data: [1203, 1632, 321, 231],
+                        borderColor: "rgb(59, 59, 59)",
+                        borderWidth: "1",
+                        backgroundColor: ["blue", "red", "orange", "green"]
+                    }]
+                },
+                options:{
+                    legend: {
+                        display: true
+                    },
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins:{
+                        tooltips: {
+                            enabled: false
+                        },
+                        datalabels:{
+                            color: "white",
+                            font: {
+                                size: 14
+                            },
+                            formatter: (value, ctx) => {
+                                let sum = 0;
+                                let dataArr = ctx.chart.data.datasets[0].data;
+                                dataArr.map(data => {
+                                    sum += data;
+                                    return sum;
+                                });
+                                let percentage = (value*100 / sum).toFixed(2)+"%";
+                                return percentage;
+                            }
+                        }, 
+                        legend:{
+                            labels:{
+                                boxWidth: 17
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels],
+                label: "Where to shop"
+            },
+            shop_location: {
+                type: "pie",
+                data: {
+                    labels: ["Walmart", "Target", "Amazon websites", "Others"],
+                    datasets:[{
+                        labels: ["Walmart", "Target", "Amazon websites", "Others"],
+                        data: [562, 872, 1293, 452],
+                        borderColor: "rgb(59, 59, 59)",
+                        borderWidth: "1",
+                        backgroundColor: ["blue", "red", "orange", "green"]
+                    }]
+                },
+                options:{
+                    legend: {
+                        display: true
+                    },
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins:{
+                        tooltips: {
+                            enabled: false
+                        },
+                        datalabels:{
+                            color: "white",
+                            font: {
+                                size: 14
+                            },
+                            formatter: (value, ctx) => {
+                                let sum = 0;
+                                let dataArr = ctx.chart.data.datasets[0].data;
+                                dataArr.map(data => {
+                                    sum += data;
+                                    return sum;
+                                });
+                                let percentage = (value*100 / sum).toFixed(2)+"%";
+                                return percentage;
+                            }
+                        }, 
+                        legend:{
+                            labels:{
+                                boxWidth: 17
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels],
+                label: "Where to shop"
+            },
+            how_to_reach: {
+                type: "pie",
+                data: {
+                    labels: ["Facebook Ads", "Youtube Ads", "Google Chrome Ads", "Others"],
+                    datasets:[{
+                        labels: ["Facebook Ads", "Youtube Ads", "Google Chrome Ads", "Others"],
+                        data: [672, 1293, 982, 432],
+                        borderColor: "rgb(59, 59, 59)",
+                        borderWidth: "1",
+                        backgroundColor: ["blue", "red", "orange", "green"]
+                    }]
+                },
+                options:{
+                    legend: {
+                        display: true
+                    },
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins:{
+                        tooltips: {
+                            enabled: false
+                        },
+                        datalabels:{
+                            color: "white",
+                            font: {
+                                size: 14
+                            },
+                            formatter: (value, ctx) => {
+                                let sum = 0;
+                                let dataArr = ctx.chart.data.datasets[0].data;
+                                dataArr.map(data => {
+                                    sum += data;
+                                    return sum;
+                                });
+                                let percentage = (value*100 / sum).toFixed(2)+"%";
+                                return percentage;
+                            }
+                        }, 
+                        legend:{
+                            labels:{
+                                boxWidth: 17
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels],
+                label: "Where to shop"
             }
         }
 
@@ -158,8 +316,8 @@ class PersonaContainer extends Component {
                             <PersonaBioDetails bios={this.state.bios}></PersonaBioDetails>
                             <ul className='utility_wrapper'>
                                 <div className='analytic_wrapper'>
-                                    <div className='label_wrapper'><label className='label' id='analytics_wrapper'>Analytics</label></div>
-                                    <div className='img_wrapper' href='#'><img className='img' id='analytics_img' src={Analytics} alt='pie_icon'></img></div>
+                                    <div className='label_wrapper' href='#' onClick={(e) => this.openAnalytics(e)}><label href='#' onClick={(e) => this.openAnalytics(e)} className='label' id='analytics_wrapper'>Analytics</label></div>
+                                    <div className='img_wrapper' href='#' onClick={(e) => this.openAnalytics(e)}><img href='#' onClick={(e) => this.openAnalytics(e)} className='img' id='analytics_img' src={Analytics} alt='pie_icon'></img></div>
                                 </div>
                                 <Social social={this.state.social}></Social>
                             </ul>
@@ -187,9 +345,36 @@ class PersonaContainer extends Component {
                             <ChartInfo {...this.state.motivation}></ChartInfo>
                         </li>
                     </ul>
+                    <div className='Analytics_container_wrapper'>
+                        <div className='exit_button' href='#' onClick={() => this.closeAnalytics()}>
+                            <span className='exit'>X</span>
+                        </div>
+                        <div className='sep'></div>
+                        <div className='Analytics_container'>
+                            <ChartInfo {...this.state.shop_method}></ChartInfo>
+                            <ChartInfo {...this.state.shop_location}></ChartInfo>
+                            <ChartInfo {...this.state.how_to_reach}></ChartInfo>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
+    }
+
+    closeAnalytics(){
+        const analytics_wrapper = document.getElementsByClassName('Analytics_container_wrapper')[0];
+        const exit_button = document.getElementsByClassName('exit_button')[0];
+        analytics_wrapper.classList.toggle('active');
+        exit_button.classList.toggle('active');
+    }
+
+    openAnalytics(e){
+        if(document.getElementsByClassName('analytic_wrapper')[0].contains(e.target)){
+            const analytics_wrapper = document.getElementsByClassName('Analytics_container_wrapper')[0];
+            const exit_button = document.getElementsByClassName('exit_button')[0];
+            analytics_wrapper.classList.toggle('active');
+            exit_button.classList.toggle('active');
+        }
     }
 }
  
