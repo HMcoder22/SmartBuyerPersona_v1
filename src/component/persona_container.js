@@ -72,7 +72,7 @@ class PersonaContainer extends Component {
                         label: "Preferred Channeled",
                         data: [860, 782, 421, 892, 1371],
                         borderColor: "red",
-                        backgroundColor: ["lightblue", "#ffcccb", "lightgreen", "lightyellow", "#CBC3E3"]
+                        backgroundColor: ["blue", "red", "green", "orange", "purple"]
                     }],
                 },
                 options: {
@@ -83,7 +83,7 @@ class PersonaContainer extends Component {
                     responsive: true,
                     plugins:{
                         datalabels: {
-                            color: "black"
+                            color: "white"
                         }
                     },
                 },
@@ -107,7 +107,7 @@ class PersonaContainer extends Component {
                         label: ["Motivation"],
                         data: [782, 671, 879, 982, 582],
                         borderColor: "red",
-                        backgroundColor: ["lightblue", "#ffcccb", "lightgreen", "lightyellow", "#CBC3E3"]
+                        backgroundColor: ["blue", "red", "green", "orange", "purple"]
                     }],
                 },
                 options: {
@@ -118,7 +118,7 @@ class PersonaContainer extends Component {
                     responsive: true,
                     plugins:{
                         datalabels: {
-                            color: "black"
+                            color: "white"
                         }
                     },
                 },
