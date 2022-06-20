@@ -9,7 +9,7 @@ class SelectionBox extends Component {
         })
         return (
             <div className='selection_box'>
-                <select className='select' id={this.props.id} defaultValue={'DEFAULT'}>
+                <select className='select' id={this.props.id} defaultValue={'DEFAULT'} onChange={this.props.onChange} name={this.props.name}>
                     <option className='opion' value="DEFAULT" disabled>{this.props.placeholder}</option>
                     {option_selection}            
                 </select>

@@ -1,0 +1,1 @@
+export const tone = ["Happy", "Friendly", "Formal", "Calm", "Professional", "Energetic"]

@@ -5,7 +5,7 @@ class LineChart extends Component {
     render() { 
         return (
             <div className='chart_wrapper' id='line_chart'>
-                <Line data={this.props.data} options={this.props.options}></Line>
+                <Line data={this.props.data} options={this.props.options} alt='line_chart'></Line>
             </div>
         );
     }

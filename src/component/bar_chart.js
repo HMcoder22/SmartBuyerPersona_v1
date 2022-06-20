@@ -6,7 +6,7 @@ class BarChart extends Component {
     render() { 
         return (
             <div className='chart_wrapper' id='bar_chart'>
-                <Bar data={this.props.data} options={this.props.options}></Bar>
+                <Bar data={this.props.data} options={this.props.options} alt='bar_chart'></Bar>
             </div>
         );
     }

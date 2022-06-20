@@ -28,7 +28,7 @@
     width: 80%;
 }
 
-.form_wrapper, .tool_container{
+.form_wrapper, .tool_container, .persona_wrapper, .copy_generator_wrapper, .result_page_wrapper{
     min-width: 800px;
     background-color: white;
     margin-left: 100px;
@@ -38,7 +38,6 @@
 .label_wrapper{
     color: red;
     font-size: x-large;
-    font-weight: bold;
     padding-left: 40px;
     padding-top: 120px;
 }
@@ -102,4 +101,19 @@ button:active{
 
 .label{
     font-weight: bold;
+}
+
+span, p{
+    font-weight: lighter;
+}
+
+ul > li{
+    list-style-type: none;
+}
+
+.asterisk{
+    color: red;
+    font-size: large;
+    font-weight: bold;
+    padding-left: 2px;
 }
