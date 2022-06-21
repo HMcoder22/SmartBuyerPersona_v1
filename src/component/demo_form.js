@@ -18,7 +18,7 @@ class DemoForm extends Component {
             occupation: '',
             industry: '',
             country: '',
-            state: 'Alabama',
+            state: '',
             redirect: false,
             input_type: [{
                 type: 'text',
@@ -138,7 +138,7 @@ class DemoForm extends Component {
 
         if(this.state.selection_box[3].options.length === 0){
             for(const element of json_file){
-                if(element.state === this.state.state){
+                if(element.state === this.state.state || (element.state === 'Alabama' && this.state.state === '')){
                     for(const occupation of element.occupation){
                         this.state.selection_box[3].options.push({
                             value: occupation,
@@ -232,14 +232,20 @@ class DemoForm extends Component {
         .then(res => {
             // Successfully validating the data
             if(res.data.error === undefined){     
-                const {gender, age, country, state, occupation, income} = res.data;
+                const {gender, age, country, state, occupation, income, img, name, goals, challenges, biography, marital} = res.data;
                 sessionStorage.setItem('persona', JSON.stringify({
                     gender: gender, 
                     age: age, 
                     country: country, 
                     state: state, 
                     occupation: occupation,
-                    income: income
+                    income: income,
+                    martial: marital,
+                    img: img,
+                    name: name,
+                    goals: goals,
+                    challenges: challenges,
+                    biography: biography
                 }));
                 this.setState({redirect: true});
             }
@@ -312,7 +318,7 @@ class DemoForm extends Component {
 
 
         for(const element of state_occupation){
-            if(element.state === this.state.state){
+            if(element.state === this.state.state || (element.state === 'Alabama' && this.state.state === '')){
                 for(const occupation of element.occupation){
                     for(const key of industry_list[((industryIndex > 0) ? industryIndex - 1: 0)].key){
                         if(occupation.toUpperCase().includes(key)){

@@ -39,7 +39,6 @@ class ResultPageContainer extends Component {
                         <span className='label' id='result_label'>Result</span>
                     </div>
                     <div className='results_window'>
-                        
                         <ul>
                             {list_persona}
                         </ul>

@@ -9,7 +9,6 @@ import ProfileImg from '../CSS/img/profile_img.jpg';
 import Facebook from '../CSS/img/facebook_icon.png';
 import Instagram from '../CSS/img/insta_icon.png';
 import Twitter from '../CSS/img/twitter.png';
-import { goals_and_challenges } from '../data/goals_and_challenges';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
 
@@ -21,8 +20,8 @@ class PersonaContainer extends Component {
 
         this.state = {
             analytics_hidden: true,
-            name: 'Jimmy',
-            img: ProfileImg,
+            name: (persona_info.name !== undefined && persona_info.name !== null) ? persona_info.name : "Jimmy",
+            img: (persona_info.img !== undefined && persona_info.img !== null) ? persona_info.img : ProfileImg,
             traits: ['Hard-working', 'Motivated', 'Extrovert', 'Social', 'Dominant', "Loved"],
             bios: [{
                 type: 'Age:',
@@ -38,7 +37,7 @@ class PersonaContainer extends Component {
             },
             {
                 type: 'Family:',
-                value: 'Married, 2 kids'
+                value: (persona_info.martial !== undefined && persona_info.martial !== null) ? persona_info.martial : 'Married, 2 kids'
             },
             {
                 type: 'Location:',
@@ -63,11 +62,11 @@ class PersonaContainer extends Component {
                 type: 'Twitter',
                 url: '/twitter'
             }],
-            biography: "I am a diligent worker and also a fashion enjoyer. I love shopping with my friends during my free time. My favorite shoe brand is Nike. I am a diligent worker and also a fashion enjoyer. I love shopping with my friends during my free time. My favorite shoe brand is Nike. I am a diligent worker and also a fashion enjoyer. I love shopping with my friends during my free time. My favorite shoe brand is Nike. I am a diligent worker and also a fashion enjoyer.",
+            biography: (persona_info.biography !== undefined && persona_info.biography !== null) ? persona_info.biography : "I am a diligent worker and also a fashion enjoyer. I love shopping with my friends during my free time. My favorite shoe brand is Nike. I am a diligent worker and also a fashion enjoyer. I love shopping with my friends during my free time. My favorite shoe brand is Nike. I am a diligent worker and also a fashion enjoyer. I love shopping with my friends during my free time. My favorite shoe brand is Nike. I am a diligent worker and also a fashion enjoyer.",
             preferred_channel: {
                 type: "bar",
                 data: {
-                    labels: ["YouTube", "Facebook", "Google Chrome", "Yahoo", "Newspaper"],
+                    labels: ["YouTube", "Facebook", "Google Chrome", "Yahoo Stock Market", "Newspaper"],
                     datasets: [{ 
                         label: "Preferred Channeled",
                         data: [860, 782, 421, 892, 1371],
@@ -89,11 +88,12 @@ class PersonaContainer extends Component {
                 },
                 label: 'Preferred Channel'
             },
-            goals: [
+            goals: (persona_info.goals !== undefined && persona_info.goals !== null) ? persona_info.goals : [
                 "Goal 1", 
                 "Goal 2", 
                 "Goal 3"],
-            challenges: [
+            challenges: (persona_info.challenges !== undefined && persona_info.challenges !== null) ? persona_info.challenges :
+            [
                 "Challenges 1", 
                 "Challenges 2", 
                 "Challenges 3", 
@@ -128,9 +128,9 @@ class PersonaContainer extends Component {
             shop_method: {
                 type: "pie",
                 data: {
-                    labels: ["In person", "Online", "Curbside", "Delivery"],
+                    labels: ["In store", "Online", "Curbside", "Delivery"],
                     datasets:[{
-                        labels: ["In person", "Online", "Curbside", "Delivery"],
+                        labels: ["In store", "Online", "Curbside", "Delivery"],
                         data: [1203, 1632, 321, 231],
                         borderColor: "rgb(59, 59, 59)",
                         borderWidth: "1",
@@ -171,7 +171,7 @@ class PersonaContainer extends Component {
                     }
                 },
                 plugins: [ChartDataLabels],
-                label: "Where to shop"
+                label: "How to shop"
             },
             shop_location: {
                 type: "pie",
@@ -267,15 +267,7 @@ class PersonaContainer extends Component {
                     }
                 },
                 plugins: [ChartDataLabels],
-                label: "Where to shop"
-            }
-        }
-
-        for(const element of goals_and_challenges){
-            if(element.occupation === persona_info.occupation){
-                this.state.goals = element.goals;
-                this.state.challenges = element.challenges;
-                this.state.biography = element.biography;
+                label: "How to reach " + ((persona_info.gender === "Male") ? "him" : "her")
             }
         }
     }
