@@ -26,6 +26,14 @@ export const chart = [{
         legend: {
             display: true
 
+        },
+        plugins:{
+          tooltips:{
+            enabled: false
+          },
+          datalabels:{
+            display: false
+          }
         }
     },
     label: "Social media clicks every month"
@@ -55,7 +63,15 @@ export const chart = [{
             }
         },
         maintainAspectRatio: false,
-        responsive: true
+        responsive: true,
+        plugins:{
+          tooltips:{
+            enabled: false
+          },
+          datalabels:{
+            display: false
+          }
+        }
     },
     label: 'Visitors Type'
 },
@@ -91,7 +107,15 @@ export const chart = [{
           }
       },
       maintainAspectRatio: false,
-      responsive: true
+      responsive: true,
+      plugins:{
+        tooltips:{
+          enabled: false
+        },
+        datalabels:{
+          display: false
+        }
+      }
     },
     label: 'Top 3 pages'
 },
@@ -114,6 +138,14 @@ export const chart = [{
     options: {
       legend: {
           display: true,
+      },
+      plugins:{
+        tooltips:{
+          enabled: false
+        },
+        datalabels:{
+          display: false
+        }
       }
     },
     label: 'Sale distribution'
@@ -142,6 +174,14 @@ export const chart = [{
     options: {
       legend: {
           display: true,
+      },
+      plugins:{
+        tooltips:{
+          enabled: false
+        },
+        datalabels:{
+          display: false
+        }
       }
     },
     label: 'Sales resulting from social media and web traffic'
