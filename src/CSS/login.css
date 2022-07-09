@@ -1,0 +1,138 @@
+html, body {
+    margin:0px;
+    height:100%;
+}
+
+.arrow_decoration{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    min-width: 700px;
+    min-height: 700px;
+    max-width: 900px;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.arrow_background{
+    width: 0; 
+    height: 0; 
+    border-left: 200px solid transparent;
+    border-right: 200px solid transparent; 
+}
+
+
+.login_authenticate{
+    background: url("https://drive.google.com/uc?id=1-R5etBHJBcoThjLMBvTYmUMA0I5_vL_9") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    min-height: 900px;
+    min-width: 1200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.top, .bottom{
+    border-top: 300px solid #51A8B1;
+}
+
+.middle {
+    border-top: 300px solid #051D40;
+}
+
+.sign_in_container{
+    width: 600px;
+    height: 100%;
+    background-color: white;
+    box-shadow: 2px 8px 5px 2px rgba(0,0,0,0.5);
+    min-height: 700px;
+    position: absolute;
+}
+
+.sign_in_box{
+    position: absolute;
+    top: 3%;
+    right: 0%;
+    height: 94%;
+    min-height: 850px;
+    min-width: 650px;
+    max-width: 1100px;
+    width: 50%;
+}
+
+#forgot_password_link, #create_account_link{
+    color: black;
+}
+
+#sign_in_label{
+    text-align: center;
+    margin-top: 120px;
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+#email_label, #password_label{
+    font-weight: 400;
+}
+
+.email_label_wrapper, .password_label_wrapper{
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.login_box > div > div > input{
+    width: 70%;
+    min-width: 250px;
+    font-size: larger;
+}
+
+#login_form{
+    margin-left: 110px;
+    margin-right: 0;
+}
+
+.forgot_password_wrapper{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    text-align: end;
+    margin-right: 141px;
+}
+
+.login_submission{
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 45px;
+    width: 155px;
+    font-size: larger;
+    background-color: #51A8B1;
+    color: white;
+    border-width: 1.5px;
+    box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.35);
+}
+
+.login_submission:active{
+    background-color: #40826d;
+}
+
+.create_wrapper{
+    margin-left: 112px;
+    width: auto;
+}
+
+.arrow > a > img{
+    height: 60px;
+    width: 370px;
+}
+
+.arrow{
+    margin-top: 70px;
+}
