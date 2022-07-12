@@ -84,7 +84,7 @@ export default class Login extends Component {
         // axios.post("http://localhost:4000/login/authentication", this.state)
         axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/authenticate/login/authentication", this.state)
         .then(res =>{
-            if(JSON.parse(res.data).result === 'success'){
+            if(JSON.parse(res).result === 'success'){
                 this.setState({success: true});
                 sessionStorage.setItem('loginSuccess', true);
             }
