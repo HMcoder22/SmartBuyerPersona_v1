@@ -4,6 +4,7 @@ import InputType from './input_type';
 import SelectionBox from './selection_box';
 import { tone } from '../data/tone';
 import CopyContent from './copy_content';
+import axios from 'axios';
 import { cwcontents } from '../data/copy_generator_written';
 import { chcontents } from '../data/copy_generator_hashtag';
 import { cgcontents } from '../data/copy_generator_graphics';
@@ -13,17 +14,19 @@ class CopyGeneratorContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            max_contents: 5,
             generated: false,
             output: [],
-            product_or_services: {},
-            gch: {},
+            product_or_services: "",
+            gch: "",                            // graphics, copy, or hashtags
+            description: "",
+            tone: "",
             checkbox_type: [{
                 type: 'checkbox',
                 id: 'product_checkbox',
                 defaultChecked: false,
                 checked: false,
                 disable: false,
+                name: "product",
                 label: {
                     name: 'Product',
                     id: 'product_label'
@@ -35,6 +38,7 @@ class CopyGeneratorContainer extends Component {
                 defaultChecked: false,
                 checked: false,
                 disable: false,
+                name: "service",
                 label: {
                     name: 'Service',
                     id: 'service_label'
@@ -46,6 +50,7 @@ class CopyGeneratorContainer extends Component {
                 defaultChecked: false,
                 checked: false,
                 disable: false,
+                name: "graphic",
                 label: {
                     name: 'Graphics',
                     id: 'graphic_label'
@@ -56,6 +61,7 @@ class CopyGeneratorContainer extends Component {
                 defaultChecked: false,
                 checked: false,
                 disable: false,
+                name: "copy",
                 label: {
                     name: 'Written Copy',
                     id: 'copy_label'
@@ -66,6 +72,7 @@ class CopyGeneratorContainer extends Component {
                 defaultChecked: false,
                 checked: false,
                 disable: false,
+                name: 'hashtags',
                 label: {
                     name: 'Hashtag',
                     id: 'hashtag_label'
@@ -74,18 +81,22 @@ class CopyGeneratorContainer extends Component {
             input_type:{
                 type: 'textarea',
                 placeholder: 'Please select one of two options!',
-                id: 'description'
+                id: 'description',
+                name: 'description'
             },
             selection_box: {
                 id: 'category',
                 placeholder: 'Select Tone',
-                options: []
+                options: [],
+                name: "tone"
             }
         }
     }
 
     state = {  } 
     render() {
+        console.log(this.state.output);
+
         if(this.state.selection_box.options.length === 0){
             // Adding all the tones to the selection box's options
             for(const element of tone){
@@ -103,14 +114,14 @@ class CopyGeneratorContainer extends Component {
                 <div className='copy_generator_wrapper'>
                     <div className='input'>
                         <div className='label_wrapper' id='copy_generator_label_wrapper'><label className='label' id='copy_generator_label'>Copy Generator</label></div>
-                        <form className='form' onSubmit={(event) => this.handleSubmit(event, '/validation')}>
+                        <form className='form' onSubmit={(event) => this.handleSubmit(event)}>
                             <div className='checkbox_wrapper'>
                                 <CheckBox {...this.state.checkbox_type[0]} onChange={(event) => this.handleChange(event)}></CheckBox>
                                 <CheckBox {...this.state.checkbox_type[1]} onChange={(event) => this.handleChange(event)}></CheckBox>
                             </div>
                             <div className='target_description'>
                                 <div className='label_wrapper'><label className='label' id='description_label'>Description</label></div>
-                                <InputType {...this.state.input_type}></InputType>
+                                <InputType {...this.state.input_type} onChange={(event) => this.handleChange(event)}></InputType>
                             </div>
                             <ul id='tone_and_output_type'>
                                 <li>
@@ -128,13 +139,13 @@ class CopyGeneratorContainer extends Component {
                                     </li>
                                 </ul>
                             </ul>
-                            <div className='button_wrapper' id='generate_wrapper'><button className='button' type='submit' id='generate' onClick={() => this.handleGenerate()}>Generate</button></div>
+                            <div className='button_wrapper' id='generate_wrapper'><button className='button' type='submit' id='generate'>Generate</button></div>
                         </form>
                     </div>
                     <div className='output'>
                         <div className='result_window'>
                             {this.state.output}
-                            <div className='button_wrapper' id='generate_more_wrapper'><button className='button' type='button' id='generate_more' onClick={() => this.handleMore()}>More</button></div>
+                            <div className='button_wrapper' id='generate_more_wrapper'><button className='button' type='button' id='generate_more'>More</button></div>
                         </div>
                     </div>
                 </div>
@@ -142,62 +153,60 @@ class CopyGeneratorContainer extends Component {
         );
     }
 
-    // Generating content
-    generateContent(max_contents){
-        // Copy
-        if(this.state.gch.id === 'copy_checkbox' && this.state.gch.checked){
-            return cwcontents.map((items, key) => {
-                if(key < max_contents){
-                    return(
-                        <CopyContent {...items} key={key}></CopyContent>
-                    )
-                }
-                return(
-                    <React.Fragment key={key}></React.Fragment>
-                )
-            })
-        }
+    // // Generating content
+    // generateContent(max_contents){
+    //     // Copy
+    //     if(this.state.gch.id === 'copy_checkbox' && this.state.gch.checked){
+    //         return cwcontents.map((items, key) => {
+    //             if(key < max_contents){
+    //                 return(
+    //                     <CopyContent {...items} key={key}></CopyContent>
+    //                 )
+    //             }
+    //             return(
+    //                 <React.Fragment key={key}></React.Fragment>
+    //             )
+    //         })
+    //     }
         
-        // Hashtag
-        if(this.state.gch.id === 'hashtag_checkbox' && this.state.gch.checked){
-            return chcontents.map((items, key) => {
-                if(key < max_contents){
-                    return(
-                        <CopyContent {...items} key={key}></CopyContent>
-                    )
-                }
-                return(
-                    <React.Fragment key={key}></React.Fragment>
-                )
-            })
-        }
+    //     // Hashtag
+    //     if(this.state.gch.id === 'hashtag_checkbox' && this.state.gch.checked){
+    //         return chcontents.map((items, key) => {
+    //             if(key < max_contents){
+    //                 return(
+    //                     <CopyContent {...items} key={key}></CopyContent>
+    //                 )
+    //             }
+    //             return(
+    //                 <React.Fragment key={key}></React.Fragment>
+    //             )
+    //         })
+    //     }
 
-        // Graphic
-        if(this.state.gch.id === 'graphic_checkbox' && this.state.gch.checked){
-            return cgcontents.map((items, key) => {
-                if(key < max_contents){
-                    return(
-                        <CopyContent {...items} key={key}></CopyContent>
-                    )
-                }
-                return(
-                    <React.Fragment key={key}></React.Fragment>
-                )
-            })
-        }
-
-        alert('Need to select one output type!');
-    }
+    //     // Graphic
+    //     if(this.state.gch.id === 'graphic_checkbox' && this.state.gch.checked){
+    //         return cgcontents.map((items, key) => {
+    //             if(key < max_contents){
+    //                 return(
+    //                     <CopyContent {...items} key={key}></CopyContent>
+    //                 )
+    //             }
+    //             return(
+    //                 <React.Fragment key={key}></React.Fragment>
+    //             )
+    //         })
+    //     }
+    // }
 
     // Handling generating function
-    handleGenerate(){
-        this.setState({max_contents: 5});
-        let copy_content = this.generateContent(5);
-        this.setState(prevState => ({
-            ...prevState,
-            output: copy_content
-        }))
-    }
+    // handleGenerate(){
+    //     this.setState({max_contents: 5});
+    //     let copy_content = this.generateContent(5);
+    //     this.setState(prevState => ({
+    //         ...prevState,
+    //         output: copy_content
+    //     }))
+    // }
 
     // Handling product and services check box
     handleChange(event){
@@ -222,7 +231,13 @@ class CopyGeneratorContainer extends Component {
             )  
         }))
 
-        this.setState({product_or_services: event.target});
+        if(event.target.id === "description"){
+            this.setState({description: event.target.value});
+        }
+        
+        if(event.target.name === 'product' || event.target.name === 'service')
+            this.setState({product_or_services: event.target.id});
+        
         this.setState(prevState => ({
             input_type: {
                 ...prevState.input_type,
@@ -258,29 +273,53 @@ class CopyGeneratorContainer extends Component {
             )  
         }))
 
-        this.setState({gch: event.target})
+        this.setState({gch: event.target.id})
     }
 
     // Handling submission
-    handleSubmit(event, url){
-        alert("handdling submit");
-        if(!this.state.generated){
-            document.getElementsByClassName("result_window")[0].classList.toggle("active");
-            this.setState({generated: true});
+    handleSubmit(e){
+        e.preventDefault();
+        if(this.state.gch === ""){
+            alert("Please select at least one option: product or service!")
+            return;
         }
-        event.preventDefault();
+        if(this.state.description === "" && this.state.product_or_services === "product_checkbox"){
+            alert("Please enter a product's description");
+            return;
+        }
+        if(this.state.description === ""){
+            alert("Please enter a service's description");
+            return;
+        }
+
+        const type = (this.state.gch === 'graphic_checkbox') ? "graphic" : (this.state.gch === 'copy_checkbox') ? 'written' : 'hashtag'
+        const url = `http://localhost:4000/copy_generator/${type}`
+        axios.post(url, this.state)
+        .then(res => {
+            const output = res.data.body.data.map((items, key) =>{
+                return <CopyContent {...items} key={key}></CopyContent>
+            })
+            this.setState({output: output});
+            if(!this.state.generated){
+                document.getElementsByClassName("result_window")[0].classList.toggle("active");
+                this.setState({generated: true});
+            } 
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     // Increment the maximum contents the application can display
-    handleMore(){
-        if(this.state.max_contents < cwcontents.length)
-            this.setState({max_contents: this.state.max_contents + 5});
-        let copy_content = this.generateContent(this.state.max_contents + 5);
-        this.setState(prevState => ({
-            ...prevState,
-            output: copy_content
-        }))
-    }
+    // handleMore(){
+    //     if(this.state.max_contents < cwcontents.length)
+    //         this.setState({max_contents: this.state.max_contents + 5});
+    //     let copy_content = this.generateContent(this.state.max_contents + 5);
+    //     this.setState(prevState => ({
+    //         ...prevState,
+    //         output: copy_content
+    //     }))
+    // }
 }
  
 export default CopyGeneratorContainer;
