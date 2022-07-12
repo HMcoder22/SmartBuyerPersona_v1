@@ -5,10 +5,6 @@ import SelectionBox from './selection_box';
 import { tone } from '../data/tone';
 import CopyContent from './copy_content';
 import axios from 'axios';
-import { cwcontents } from '../data/copy_generator_written';
-import { chcontents } from '../data/copy_generator_hashtag';
-import { cgcontents } from '../data/copy_generator_graphics';
-
 
 class CopyGeneratorContainer extends Component {
     constructor(props){
