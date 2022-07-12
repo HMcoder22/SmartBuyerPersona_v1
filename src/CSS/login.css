@@ -24,7 +24,7 @@ html, body {
 }
 
 
-.login_authenticate{
+.login_authenticate, .create_account_authenticate{
     background: url("https://drive.google.com/uc?id=1-R5etBHJBcoThjLMBvTYmUMA0I5_vL_9") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -47,7 +47,7 @@ html, body {
     border-top: 300px solid #051D40;
 }
 
-.sign_in_container{
+.sign_in_container, .create_container{
     width: 600px;
     height: 100%;
     background-color: white;
@@ -56,7 +56,7 @@ html, body {
     position: absolute;
 }
 
-.sign_in_box{
+.sign_in_box, .create_box{
     position: absolute;
     top: 3%;
     right: 0%;
@@ -67,8 +67,14 @@ html, body {
     width: 50%;
 }
 
-#forgot_password_link, #create_account_link{
+#create_account_link, #login_link{
     color: black;
+    font-size: larger;
+}
+
+#forgot_password_link{
+    color: black;
+    font-size: large;
 }
 
 #sign_in_label{
@@ -78,22 +84,29 @@ html, body {
     font-weight: 500;
 }
 
-#email_label, #password_label{
+#create_account_label{
+    text-align: center;
+    margin-top: 80px;
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+#email_label, #password_label, #name_label, #birthdate_label, #password_reenter_label{
     font-weight: 400;
 }
 
-.email_label_wrapper, .password_label_wrapper{
+.email_label_wrapper, .password_label_wrapper, .name_label_wrapper, .birthdate_label_wrapper, .password_reenter_label_wrapper{
     margin-top: 15px;
     margin-bottom: 5px;
 }
 
-.login_box > div > div > input{
+.login_box > div > div > input, .create_account_box > div > div > input{
     width: 70%;
     min-width: 250px;
     font-size: larger;
 }
 
-#login_form{
+#login_form, #create_account_form{
     margin-left: 110px;
     margin-right: 0;
 }
@@ -106,8 +119,8 @@ html, body {
     margin-right: 141px;
 }
 
-.login_submission{
-    margin-left: 100px;
+.login_submission, .create_account_submission{
+    margin-left: 111px;
     margin-top: 30px;
     margin-bottom: 30px;
     height: 45px;
@@ -119,12 +132,30 @@ html, body {
     box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.35);
 }
 
-.login_submission:active{
+
+.create_account_submission{
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 45px;
+    width: 155px;
+    font-size: larger;
+    background-color: #51A8B1;
+    color: white;
+    border-width: 1.5px;
+    box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.35);
+}
+.login_submission:active, .create_account_submission:active{
     background-color: #40826d;
 }
 
 .create_wrapper{
     margin-left: 112px;
+    width: auto;
+}
+
+.login_wrapper{
+    margin-left: 145px;
     width: auto;
 }
 
@@ -135,4 +166,9 @@ html, body {
 
 .arrow{
     margin-top: 70px;
+}
+
+.alert_text > span{
+    color: red;
+    font-weight: 500;
 }
