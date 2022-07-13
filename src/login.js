@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './CSS/login.css';
+import './CSS/verifycode.css'
 import InputType from './component/input_type';
 import { Link, Navigate } from 'react-router-dom';
 import BackArrow from './CSS/img/back_arrow.png';

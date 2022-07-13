@@ -14,7 +14,7 @@ export default class CreateAccount extends Component {
             re_password: '',
             fname: '',
             birthdate: '',
-            authorized_code: '',
+            authorized_code: this.generateRandomToken(),
             email_alert: [],
             repass_alert: [],
             pass_alert: [],
@@ -138,7 +138,8 @@ export default class CreateAccount extends Component {
         .then(res =>{
             const result = JSON.parse(res.data);
             if(result.success){
-                sessionStorage.setItem('get_login_token', this.generateRandomToken());
+                sessionStorage.setItem('authorized token', this.state.authorized_code);
+                sessionStorage.setItem('registered email', this.state.email);
                 this.setState({success : true});
             }
             else{
@@ -191,7 +192,7 @@ export default class CreateAccount extends Component {
 
     generateRandomToken(){
         var token = 0;
-        for(let i = 0; i < 8; i++){
+        for(let i = 0; i < 9; i++){
             token += this.getRandomNumber(10);
             token *= 10;
         }
