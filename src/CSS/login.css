@@ -119,7 +119,7 @@ html, body {
     margin-right: 141px;
 }
 
-.login_submission, .create_account_submission{
+.login_submission{
     margin-left: 111px;
     margin-top: 30px;
     margin-bottom: 30px;
