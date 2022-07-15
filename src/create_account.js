@@ -14,11 +14,16 @@ export default class CreateAccount extends Component {
             re_password: '',
             fname: '',
             birthdate: '',
+            bname: '',              // Business name
+            phone: '',              // Phone number
             authorized_code: this.generateRandomToken(),
             email_alert: [],
             repass_alert: [],
             pass_alert: [],
             birthdate_alert: [],
+            bname_alert: [],
+            phone_alert: [],
+            fname_alert: [],
             success: false,
             full_name_input:{
                 type: 'text',
@@ -37,6 +42,18 @@ export default class CreateAccount extends Component {
                 placeholder: "Enter email's address",
                 id: 'email_input',
                 name: 'email'
+            },
+            bname_input: {
+                type: 'text',
+                placeholder: "Enter your business's name here",
+                id: 'bname_input',
+                name: 'bname'
+            },
+            phone_input: {
+                type: 'text',
+                placeholder: "Enter your phone number here",
+                id: 'phone_number_input',
+                name: 'phone'
             },
             password_input: {
                 type: 'password',
@@ -75,9 +92,13 @@ export default class CreateAccount extends Component {
                             <form className='form' onSubmit={(event) => this.handleSubmit(event)} id='create_account_form'>
                                 <div className='create_account_box'>
                                     <div className='name_box'>
-                                        <div className='name_label_wrapper'><label className='label' id='name_label'>Full Name</label></div>
+                                        <div className='name_label_wrapper'>
+                                            <label className='label' id='name_label'>Full Name</label>
+                                            <label className='asterisk'>*</label>
+                                        </div>
                                         <InputType {...this.state.full_name_input} onChange={(event) => this.handleChange(event)}></InputType>
                                     </div>
+                                    {this.state.fname_alert}
                                     <div className='birthdate_box'>
                                         <div className='birthdate_label_wrapper'><label className='label' id='birthdate_label'>Birthdate (YYYY-MM-DD)</label></div>
                                         <InputType {...this.state.birthdate_input} onChange={(event) => this.handleChange(event)}></InputType>
@@ -91,6 +112,22 @@ export default class CreateAccount extends Component {
                                         <InputType {...this.state.email_input} onChange={(event) => this.handleChange(event)}></InputType>
                                     </div>
                                     {this.state.email_alert}
+                                    <div className='bname_box'>
+                                        <div className='bname_label_wrapper'>
+                                            <label className='label' id='bname_label'>Business Name</label>
+                                            <label className='asterisk'>*</label>
+                                        </div>
+                                        <InputType {...this.state.bname_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                    </div>
+                                    {this.state.bname_alert}
+                                    <div className='phone_number_box'>
+                                        <div className='phone_number_label_wrapper'>
+                                            <label className='label' id='phone_number_label'>Phone Number</label>
+                                            <label className='asterisk'>*</label>
+                                        </div>
+                                        <InputType {...this.state.phone_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                    </div>
+                                    {this.state.phone_alert}
                                     <div className='password_box'>
                                         <div className='password_label_wrapper'>
                                             <label className='label' id='password_label'>Password</label>
@@ -123,6 +160,7 @@ export default class CreateAccount extends Component {
     }
 
     handleChange(event){
+        // Reset alert
         if(this.state.email_alert !== [] && event.target.name === "email"){
             this.setState({email_alert: []});
         }
@@ -130,7 +168,19 @@ export default class CreateAccount extends Component {
             this.setState({repass_alert: []});
         }
         if(this.state.pass_alert !== [] && event.target.name === "password"){
-            this.setState({pass_alert: []})
+            this.setState({pass_alert: []});
+        }
+        if(this.state.birthdate_alert !== [] && event.target.name === "birthdate"){
+            this.setState({birthdate_alert: []});
+        }
+        if(this.state.phone_alert !== [] && event.target.name === "phone"){
+            this.setState({phone_alert: []});
+        }
+        if(this.state.bname_alert !== [] && event.target.name === "bname"){
+            this.setState({bname_alert: []});
+        }
+        if(this.state.fname_alert !== [] && event.target.name === "fname"){
+            this.setState({fname_alert: []});
         }
         this.setState({[event.target.name] : event.target.value});
     }
@@ -158,6 +208,8 @@ export default class CreateAccount extends Component {
                     }
                     return;
                 }
+                console.log(result.error);
+
                 result.error.forEach((items, key)=>{
                     if(items === "Unmatched password"){
                         this.setState({repass_alert: 
@@ -166,6 +218,11 @@ export default class CreateAccount extends Component {
                     }
     
                     if(items === "Missing field"){
+                        if(this.state.fname === ''){
+                            this.setState({fname_alert:
+                                <AlertBox id='fname_alert' alert='Please enter your full name'></AlertBox>
+                            })
+                        }
                         if(this.state.email === ''){
                             this.setState({email_alert: 
                                 <AlertBox id='email_alert' alert='Please enter email'></AlertBox>
@@ -181,6 +238,16 @@ export default class CreateAccount extends Component {
                                 <AlertBox id='reenter_password_alert' alert='Please enter re-enter password'></AlertBox>
                             })
                         }
+                        if(this.state.phone === ''){
+                            this.setState({phone_alert: 
+                                <AlertBox id='phone_alert' alert='Please enter your phone number'></AlertBox>
+                            })
+                        }
+                        if(this.state.bname === ''){
+                            this.setState({bname_alert:
+                                <AlertBox id='bname_alert' alert='Please enter your business name'></AlertBox>
+                            })
+                        }
                     }
     
                     if(items === "Invalid email"){
@@ -193,6 +260,24 @@ export default class CreateAccount extends Component {
                         this.setState({birthdate_alert:
                             <AlertBox id='birthdate_alert' alert='Invalid date. Please follows YYYY-MM-DD format'></AlertBox>
                         })
+                    }
+
+                    if(items === 'Invalid phone number'){
+                        this.setState({phone_alert: 
+                            <AlertBox id='phone_alert' alert="Invalid phone number"></AlertBox>
+                        })
+                    }
+
+                    if(items === 'Weak password'){
+                        
+                        this.setState({pass_alert:[
+                            <AlertBox id='password_alert' alert="Please make sure:" key='1'></AlertBox>,
+                            <AlertBox id='password_alert' alert="1. Minimum length: 12" key='2'></AlertBox>,
+                            <AlertBox id='password_alert' alert="2. Minimum uppercases: 1" key='3'></AlertBox>,
+                            <AlertBox id='password_alert' alert="3. Minimum lowercases: 1" key='4'></AlertBox>,
+                            <AlertBox id='password_alert' alert="4. Minimum numbers: 1" key='5'></AlertBox>,
+                            <AlertBox id='password_alert' alert="5. Minimum symbols: 1" key='6'></AlertBox>,
+                        ]})
                     }
                 })  
             }
@@ -212,6 +297,6 @@ export default class CreateAccount extends Component {
             token += this.getRandomNumber(10);
             token *= 10;
         }
-        return token;
+        return token + this.getRandomNumber(10);
     }
 }

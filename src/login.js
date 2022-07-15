@@ -15,6 +15,7 @@ export default class Login extends Component {
             password: '',
             auth_alert: '',
             success: false,
+            verified: undefined,
             email_input: {
                 type: 'text',
                 placeholder: "Enter email's address",
@@ -34,7 +35,21 @@ export default class Login extends Component {
     render() {
         document.title = "Login"
 
-        if(!sessionStorage.getItem('loginSuccess') || sessionStorage.getItem('loginSuccess') === undefined){
+        if(!sessionStorage.getItem('loginSuccess')){
+            if(!this.state.verified && this.state.verified !== undefined) {
+                sessionStorage.setItem('verification', 'true')
+                sessionStorage.setItem('registered email', this.state.email)
+                return (
+                    <Navigate to='/login/code_verify' replace></Navigate>
+                )
+            }
+
+            if(!this.state.access && this.state.access !== undefined){
+                alert('Access denied!');
+                window.location.reload();
+                return;
+            }
+        
             return (
                 <div className='login_authenticate'>
                     <div className='arrow_decoration'>
@@ -87,18 +102,35 @@ export default class Login extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
-        // axios.post("http://localhost:4000/login/authentication", this.state)
+        this.setState({auth_alert: []});
+
+        // axios.post("http://localhost:4002/login/authentication", this.state)
         axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/authenticate/login/authentication", this.state)
         .then(res =>{
-            if(JSON.parse(res.data).result === 'success'){
+            const ret = JSON.parse(res.data);
+            if(ret.result === 'success'){
                 this.setState({success: true});
+                this.setState({verified: true});
                 sessionStorage.setItem('loginSuccess', true);
                 return;
             }
 
-            this.setState({auth_alert: 
-                <AlertBox id='auth_alert_failed' alert='Your email or your password is incorrect'></AlertBox>
-            })
+            if(ret.error === 'Incorrect password'){
+                this.setState({auth_alert: 
+                    <AlertBox id='auth_alert_failed' alert='Your email or your password is incorrect'></AlertBox>
+                })
+                return;
+            }
+
+            if(ret.error === 'Not verified'){
+                this.setState({verified: false});
+                return;
+            }
+
+            if(ret.error === 'Access denied'){
+                this.setState({access: false});
+                return;
+            }
         })
         .catch(err => {
             console.log(err);
