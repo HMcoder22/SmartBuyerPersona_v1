@@ -98,6 +98,7 @@ export default class Verification extends Component {
         axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/code_verify/login/code_verify", this.state)
         .then(res => {
             const result = JSON.parse(res.data);
+            console.log(result);
             if(result.success){
                 this.setState({success: true});
                 return;
