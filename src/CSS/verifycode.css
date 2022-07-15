@@ -114,3 +114,37 @@ html, body {
     border-width: 1.5px;
     box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.35);
 }
+
+#resend_code_link{
+    color: black;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.resend_code_container{
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    justify-self: end;
+    display: flex;
+    justify-content: flex-end;
+    width: 79%;
+}
+
+.resend_code_container > button{
+    width: 120px;
+    background-color: #FAE3C6;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1.5px 0.5px rgba(0,0,0,0.35);
+}
+
+.resend_code_container > button:active{
+    background-color: #C1ABA6;
+    box-shadow: 0.3px 0.3px 0.5px 0.1px rgba(0,0,0,0.35);
+}
+
+#verify_alert{
+    padding-left: 76.8px;
+}
+
+

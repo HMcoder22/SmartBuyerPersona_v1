@@ -5,6 +5,8 @@ import ToolsContainer from './component/tools_container';
 class ToolHomePage extends Component {
     state = {  } 
     render() {
+        document.title = "Tool homepage"
+
         if(sessionStorage.getItem('loginSuccess')){
             return (
                 <div className='App'>           

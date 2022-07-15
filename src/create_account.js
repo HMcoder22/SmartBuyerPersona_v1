@@ -18,6 +18,7 @@ export default class CreateAccount extends Component {
             email_alert: [],
             repass_alert: [],
             pass_alert: [],
+            birthdate_alert: [],
             success: false,
             full_name_input:{
                 type: 'text',
@@ -52,6 +53,8 @@ export default class CreateAccount extends Component {
         };
     }
     render() {
+        document.title = "Create an account"
+
         if(this.state.success){
             return (
                 <Navigate to='/login/code_verify' replace></Navigate>
@@ -76,9 +79,10 @@ export default class CreateAccount extends Component {
                                         <InputType {...this.state.full_name_input} onChange={(event) => this.handleChange(event)}></InputType>
                                     </div>
                                     <div className='birthdate_box'>
-                                        <div className='birthdate_label_wrapper'><label className='label' id='birthdate_label'>Birthdate</label></div>
+                                        <div className='birthdate_label_wrapper'><label className='label' id='birthdate_label'>Birthdate (YYYY-MM-DD)</label></div>
                                         <InputType {...this.state.birthdate_input} onChange={(event) => this.handleChange(event)}></InputType>
                                     </div>
+                                    {this.state.birthdate_alert}
                                     <div className='email_box'>
                                         <div className='email_label_wrapper'>
                                             <label className='label' id='email_label'>Email</label>
@@ -140,45 +144,57 @@ export default class CreateAccount extends Component {
             if(result.success){
                 sessionStorage.setItem('authorized token', this.state.authorized_code);
                 sessionStorage.setItem('registered email', this.state.email);
+                sessionStorage.setItem('verification', 'true');
                 this.setState({success : true});
             }
             else{
-                // List of all possible errors client can encounter
-                if(result.error === "Unavailable email"){
-                    this.setState({email_alert :                                     
-                        <AlertBox id='email_alert' alert='Email already registered'></AlertBox>
-                    })
-                }
-
-                if(result.error === "Unmatched password"){
-                    this.setState({repass_alert: 
-                        <AlertBox id='reenter_password_alert' alert='Your password is not matched'></AlertBox>
-                    })
-                }
-
-                if(result.error === "Missing field"){
-                    if(this.state.email === ''){
-                        this.setState({email_alert: 
-                            <AlertBox id='email_alert' alert='Please enter email'></AlertBox>
+                // Only one error
+                if(!Array.isArray(result.error)){
+                    // List of all possible errors client can encounter
+                    if(result.error === "Unavailable email"){
+                        this.setState({email_alert :                                     
+                            <AlertBox id='email_alert' alert='Email already registered'></AlertBox>
                         })
                     }
-                    if(this.state.password === ''){
-                        this.setState({pass_alert: 
-                            <AlertBox id='password_alert' alert='Please enter password'></AlertBox>
-                        })
-                    }
-                    if(this.state.re_password === ''){
+                    return;
+                }
+                result.error.forEach((items, key)=>{
+                    if(items === "Unmatched password"){
                         this.setState({repass_alert: 
-                            <AlertBox id='reenter_password_alert' alert='Please enter re-enter password'></AlertBox>
+                            <AlertBox id='reenter_password_alert' alert='Your password is not matched'></AlertBox>
                         })
                     }
-                }
+    
+                    if(items === "Missing field"){
+                        if(this.state.email === ''){
+                            this.setState({email_alert: 
+                                <AlertBox id='email_alert' alert='Please enter email'></AlertBox>
+                            })
+                        }
+                        if(this.state.password === ''){
+                            this.setState({pass_alert: 
+                                <AlertBox id='password_alert' alert='Please enter password'></AlertBox>
+                            })
+                        }
+                        if(this.state.re_password === ''){
+                            this.setState({repass_alert: 
+                                <AlertBox id='reenter_password_alert' alert='Please enter re-enter password'></AlertBox>
+                            })
+                        }
+                    }
+    
+                    if(items === "Invalid email"){
+                        this.setState({email_alert:
+                            <AlertBox id='email_alert' alert='Invalid email'></AlertBox>
+                        })
+                    }
 
-                if(result.error === "Invalid email"){
-                    this.setState({email_alert:
-                        <AlertBox id='email_alert' alert='Invalid email'></AlertBox>
-                    })
-                }
+                    if(items === 'Invalid date'){
+                        this.setState({birthdate_alert:
+                            <AlertBox id='birthdate_alert' alert='Invalid date. Please follows YYYY-MM-DD format'></AlertBox>
+                        })
+                    }
+                })  
             }
         })
         .catch(err => {

@@ -5,6 +5,8 @@ import PersonaContainer from './component/persona_container';
 class Persona extends Component {
     state = {  } 
     render() { 
+        document.title = "Persona"
+
         if(sessionStorage.getItem('loginSuccess')){
             return (
                 <div className='App'>

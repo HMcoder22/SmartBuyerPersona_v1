@@ -86,7 +86,7 @@ html, body {
 
 #create_account_label{
     text-align: center;
-    margin-top: 80px;
+    margin-top: 60px;
     font-size: xx-large;
     font-weight: 500;
 }
@@ -171,4 +171,9 @@ html, body {
 .alert_text > span{
     color: red;
     font-weight: 500;
+}
+
+.create_account_box{
+    max-height: 520px;
+    overflow-y: auto;
 }

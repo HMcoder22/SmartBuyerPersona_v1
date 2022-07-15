@@ -7,6 +7,8 @@ import ProductForm from './component/product_form';
 class ProductFormPage extends Component {
     state = {  } 
     render() { 
+        document.title = "Product Form"
+
         if(sessionStorage.getItem('loginSuccess')){
             return (
                 <div className='App'>

@@ -6,6 +6,8 @@ import { Navigate } from 'react-router-dom';
 class Dashboard extends Component {
     state = {  } 
     render() {
+        document.title = "Dashboard";
+        
         if(sessionStorage.getItem('loginSuccess')){ 
             return (
                 <div className='App'>

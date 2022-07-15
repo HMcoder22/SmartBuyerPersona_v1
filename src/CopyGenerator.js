@@ -5,7 +5,8 @@ import { Navigate } from 'react-router-dom';
 
 class CopyGenerator extends Component {
     state = {  } 
-    render() { 
+    render() {
+        document.title = "Copy Generator" 
         if(sessionStorage.getItem('loginSuccess')){
             return (
                 <div className='App'>
