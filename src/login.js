@@ -5,6 +5,7 @@ import InputType from './component/input_type';
 import { Link, Navigate } from 'react-router-dom';
 import BackArrow from './CSS/img/back_arrow.png';
 import axios from 'axios';
+import AlertBox from './component/alert_box';
 
 export default class Login extends Component {
     constructor(props){
@@ -12,6 +13,7 @@ export default class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            auth_alert: '',
             success: false,
             email_input: {
                 type: 'text',
@@ -56,6 +58,7 @@ export default class Login extends Component {
                                         <InputType {...this.state.password_input} onChange={(event) => this.handleChange(event)}></InputType>
                                     </div>
                                 </div>
+                                {this.state.auth_alert}
                                 <div className='forgot_password_wrapper'>
                                     <Link to='/login/forgot/password' id='forgot_password_link'>Forgot Password</Link>
                                 </div>
@@ -90,7 +93,12 @@ export default class Login extends Component {
             if(JSON.parse(res.data).result === 'success'){
                 this.setState({success: true});
                 sessionStorage.setItem('loginSuccess', true);
+                return;
             }
+
+            this.setState({auth_alert: 
+                <AlertBox id='auth_alert_failed' alert='Your email or your password is incorrect'></AlertBox>
+            })
         })
         .catch(err => {
             console.log(err);
