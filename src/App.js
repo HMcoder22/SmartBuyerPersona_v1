@@ -8,6 +8,8 @@ import { Navigate } from 'react-router-dom';
 class App extends Component {
   state = {  } 
   render() { 
+    document.title = "Homepage"
+    
     if(sessionStorage.getItem('loginSuccess')){
       return (
         <div className='App'>

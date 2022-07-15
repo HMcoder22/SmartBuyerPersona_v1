@@ -30,6 +30,8 @@ export default class Login extends Component {
     }
     
     render() {
+        document.title = "Login"
+
         if(!sessionStorage.getItem('loginSuccess') || sessionStorage.getItem('loginSuccess') === undefined){
             return (
                 <div className='login_authenticate'>

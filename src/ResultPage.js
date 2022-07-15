@@ -6,6 +6,8 @@ import ResultPageContainer from './component/result_page_container';
 class ResultPage extends Component {
     state = {  } 
     render() {
+        document.title = "Result"
+
         if(sessionStorage.getItem('loginSuccess')){
             return (
                 <div className='App'>
