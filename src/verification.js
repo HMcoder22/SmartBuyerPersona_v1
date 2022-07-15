@@ -109,7 +109,7 @@ export default class Verification extends Component {
                 })
             }
             if(result.error === 'Expired code'){
-                this.setState({verified_code:
+                this.setState({verify_alert:
                     <AlertBox id='verify_alert' alert='Expired code'></AlertBox>
                 })
             }
