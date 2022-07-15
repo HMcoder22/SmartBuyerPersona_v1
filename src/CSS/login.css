@@ -91,11 +91,11 @@ html, body {
     font-weight: 500;
 }
 
-#email_label, #password_label, #name_label, #birthdate_label, #password_reenter_label{
+#email_label, #password_label, #name_label, #birthdate_label, #password_reenter_label, #bname_label, #phone_number_label{
     font-weight: 400;
 }
 
-.email_label_wrapper, .password_label_wrapper, .name_label_wrapper, .birthdate_label_wrapper, .password_reenter_label_wrapper{
+.email_label_wrapper, .password_label_wrapper, .name_label_wrapper, .birthdate_label_wrapper, .password_reenter_label_wrapper, .bname_label_wrapper, .phone_number_label_wrapper{
     margin-top: 15px;
     margin-bottom: 5px;
 }
