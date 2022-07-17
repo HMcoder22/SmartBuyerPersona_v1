@@ -29,7 +29,7 @@ export default class VerifySuccess extends Component {
                     <div className='verify_success_dropdown'>
                         <div className='wrapper'>
                             <div className='verify_success_alert'>
-                                <span>Verification successful</span>
+                                <span>Verification successful. Our rep will contact you soon within 2 business days</span>
                             </div>
                             <div className='button_wrapper'>
                                 <button type='button' id='ok_button' onClick={() => this.handleClick()}>Back to login</button>
