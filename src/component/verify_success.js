@@ -1,4 +1,3 @@
-import e from 'cors'
 import React, { Component } from 'react'
 import { Navigate } from 'react-router-dom';
 import '../CSS/verify_success.css'
