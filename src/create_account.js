@@ -80,7 +80,6 @@ export default class CreateAccount extends Component {
         document.title = "Create an account"
 
         if(!sessionStorage.getItem('loginSuccess')){
-            sessionStorage.setItem('verification', "false");
             if(this.state.success){
                 return (
                     <Navigate to='/login/code_verify' replace></Navigate>
@@ -176,6 +175,11 @@ export default class CreateAccount extends Component {
                 </div>
             )
         }
+        else{
+            return (
+                <Navigate to='/login' replace></Navigate>
+            )
+        }
     }
 
     handleChange(event){
@@ -206,8 +210,8 @@ export default class CreateAccount extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        // axios.post("http://localhost:4000/login/sign_up", this.state)
-        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/create_account/login/sign_up", this.state)
+        axios.post("http://localhost:4000/login/sign_up", this.state)
+        // axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/create_account/login/sign_up", this.state)
         .then(res =>{
             const result = JSON.parse(res.data);
             if(result.success){
