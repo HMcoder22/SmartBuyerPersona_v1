@@ -104,8 +104,8 @@ export default class Login extends Component {
         e.preventDefault();
         this.setState({auth_alert: []});
 
-        // axios.post("http://localhost:4002/login/authentication", this.state)
-        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/authenticate/login/authentication", this.state)
+        axios.post("http://localhost:4002/login/authentication", this.state)
+        // axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/authenticate/login/authentication", this.state)
         .then(res =>{
             const ret = JSON.parse(res.data);
             if(ret.result === 'success'){
