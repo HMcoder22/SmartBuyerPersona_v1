@@ -1,6 +1,7 @@
 html, body {
     margin:0px;
     height:100%;
+    width: 100%;
 }
 
 .arrow_decoration{
@@ -95,7 +96,7 @@ html, body {
     margin-right: 20px;
 }
 
-#verification_code_input{
+#email_verification_code_input, #phone_verification_code_input{
     margin-top: 5px;
     width: 300px;
     height: 70px;
@@ -143,7 +144,7 @@ html, body {
     box-shadow: 0.3px 0.3px 0.5px 0.1px rgba(0,0,0,0.35);
 }
 
-#verify_alert{
+#email_verify_alert, #phone_verify_alert{
     padding-left: 76.8px;
 }
 

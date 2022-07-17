@@ -1,6 +1,7 @@
 html, body {
     margin:0px;
     height:100%;
+    width: 100%;
 }
 
 .arrow_decoration{
@@ -91,11 +92,11 @@ html, body {
     font-weight: 500;
 }
 
-#email_label, #password_label, #name_label, #birthdate_label, #password_reenter_label, #bname_label, #phone_number_label{
+#email_label, #password_label, #name_label, #birthdate_label, #password_reenter_label, #bname_label, #phone_number_label, #job_label{
     font-weight: 400;
 }
 
-.email_label_wrapper, .password_label_wrapper, .name_label_wrapper, .birthdate_label_wrapper, .password_reenter_label_wrapper, .bname_label_wrapper, .phone_number_label_wrapper{
+.email_label_wrapper, .password_label_wrapper, .name_label_wrapper, .birthdate_label_wrapper, .password_reenter_label_wrapper, .bname_label_wrapper, .phone_number_label_wrapper, .job_label_wrapper{
     margin-top: 15px;
     margin-bottom: 5px;
 }
