@@ -90,6 +90,7 @@ export default class Login extends Component {
             )
         }
         else{
+            sessionStorage.setItem('verification', "false");
             return (
                 <Navigate to='/home'></Navigate>
             )

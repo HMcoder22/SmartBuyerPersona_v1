@@ -34,8 +34,8 @@ export default class Verification extends Component {
         document.title = "Verification"
 
         if(sessionStorage.getItem('verification') === 'true'){
-            sessionStorage.setItem('verification', 'false');
             if(this.state.success){
+                sessionStorage.setItem('verification', 'false');
                 sessionStorage.setItem('verify_success', 'true')
                 return(
                     <Navigate to='/login/code_verify/success' replace></Navigate>
@@ -80,6 +80,7 @@ export default class Verification extends Component {
             )
         }
         else{
+            sessionStorage.setItem('verification', "false");
             return (
                 <Navigate to='/login' replace></Navigate>
             )
