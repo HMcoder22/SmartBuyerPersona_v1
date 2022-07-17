@@ -16,7 +16,7 @@ export default class CreateAccount extends Component {
             birthdate: '',
             bname: '',              // Business name
             phone: '',              // Phone number
-            authorized_code: this.generateRandomToken(),
+            job: '',
             email_alert: [],
             repass_alert: [],
             pass_alert: [],
@@ -24,6 +24,7 @@ export default class CreateAccount extends Component {
             bname_alert: [],
             phone_alert: [],
             fname_alert: [],
+            job_alert: [],
             success: false,
             full_name_input:{
                 type: 'text',
@@ -54,6 +55,12 @@ export default class CreateAccount extends Component {
                 placeholder: "Enter your phone number here",
                 id: 'phone_number_input',
                 name: 'phone'
+            },
+            job_input: {
+                type: 'text',
+                placeholder: "Enter your occupation",
+                id: 'job_input',
+                name: 'job'
             },
             password_input: {
                 type: 'password',
@@ -103,6 +110,14 @@ export default class CreateAccount extends Component {
                                         <div className='birthdate_label_wrapper'><label className='label' id='birthdate_label'>Birthdate (YYYY-MM-DD)</label></div>
                                         <InputType {...this.state.birthdate_input} onChange={(event) => this.handleChange(event)}></InputType>
                                     </div>
+                                    <div className='job_box'>
+                                        <div className='job_label_wrapper'>
+                                            <label className='label' id='job_label'>Occupation</label>
+                                            <label className='asterisk'>*</label>
+                                        </div>
+                                        <InputType {...this.state.job_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                    </div>
+                                    {this.state.job_alert}
                                     {this.state.birthdate_alert}
                                     <div className='email_box'>
                                         <div className='email_label_wrapper'>
@@ -128,6 +143,7 @@ export default class CreateAccount extends Component {
                                         <InputType {...this.state.phone_input} onChange={(event) => this.handleChange(event)}></InputType>
                                     </div>
                                     {this.state.phone_alert}
+
                                     <div className='password_box'>
                                         <div className='password_label_wrapper'>
                                             <label className='label' id='password_label'>Password</label>
@@ -248,6 +264,11 @@ export default class CreateAccount extends Component {
                                 <AlertBox id='bname_alert' alert='Please enter your business name'></AlertBox>
                             })
                         }
+                        if(this.state.job === ''){
+                            this.setState({job_alert:
+                                <AlertBox id='job_alert' alert='Please enter your your job title'></AlertBox>
+                            })
+                        }
                     }
     
                     if(items === "Invalid email"){
@@ -268,8 +289,7 @@ export default class CreateAccount extends Component {
                         })
                     }
 
-                    if(items === 'Weak password'){
-                        
+                    if(items === 'Weak password'){                  
                         this.setState({pass_alert:[
                             <AlertBox id='password_alert' alert="Please make sure:" key='1'></AlertBox>,
                             <AlertBox id='password_alert' alert="1. Minimum length: 12" key='2'></AlertBox>,
@@ -285,18 +305,5 @@ export default class CreateAccount extends Component {
         .catch(err => {
             console.log(err);
         })
-    }
-
-    getRandomNumber(max){
-        return Math.floor(Math.random() * max);
-    }
-
-    generateRandomToken(){
-        var token = 0;
-        for(let i = 0; i < 9; i++){
-            token += this.getRandomNumber(10);
-            token *= 10;
-        }
-        return token + this.getRandomNumber(10);
     }
 }

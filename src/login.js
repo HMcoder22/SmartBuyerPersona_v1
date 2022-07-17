@@ -38,7 +38,6 @@ export default class Login extends Component {
         if(!sessionStorage.getItem('loginSuccess')){
             if(!this.state.verified && this.state.verified !== undefined) {
                 sessionStorage.setItem('verification', 'true')
-                sessionStorage.setItem('registered email', this.state.email)
                 return (
                     <Navigate to='/login/code_verify' replace></Navigate>
                 )

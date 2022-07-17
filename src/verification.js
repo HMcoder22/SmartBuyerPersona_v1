@@ -10,15 +10,23 @@ export default class Verification extends Component {
     constructor(props){
         super(props);
         this.state = {
-            verified_code: '',
+            email_verified_code: '',
+            phone_verified_code: '',
             username: sessionStorage.getItem('registered email'),
             success: false,
-            verify_alert: [],
-            verification_code_input: {
+            email_verify_alert: [],
+            phone_verify_alert: [],
+            email_verification_code_input: {
                 type: 'text',
-                placeholder: 'Enter your code here',
-                id: 'verification_code_input',
-                name: 'verified_code'
+                placeholder: 'Enter your email code here',
+                id: 'email_verification_code_input',
+                name: 'email_verified_code'
+            },
+            phone_verification_code_input: {
+                type: 'text',
+                placeholder: 'Enter your phone code here',
+                id: 'phone_verification_code_input',
+                name: 'phone_verified_code'
             }
         }
     }
@@ -26,8 +34,9 @@ export default class Verification extends Component {
         document.title = "Verification"
 
         if(sessionStorage.getItem('verification') === 'true'){
+            sessionStorage.setItem('verification', 'false');
             if(this.state.success){
-                sessionStorage.setItem('verification', 'false');
+                sessionStorage.setItem('verify_success', 'true')
                 return(
                     <Navigate to='/login/code_verify/success' replace></Navigate>
                 )
@@ -50,10 +59,16 @@ export default class Verification extends Component {
                             <form className='form' onSubmit={(event) => this.handleVerify(event)} id='code_verify_form'>
                                 <div className='verify_box'>
                                     <div className='code_verification_box'>
-                                        <InputType {...this.state.verification_code_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        <InputType {...this.state.email_verification_code_input} onChange={(event) => this.handleChange(event)}></InputType>
                                     </div>
                                 </div>
-                                {this.state.verify_alert}
+                                {this.state.email_verify_alert}
+                                <div className='verify_box'>
+                                    <div className='code_verification_box'>
+                                        <InputType {...this.state.phone_verification_code_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                    </div>
+                                </div>
+                                {this.state.phone_verify_alert}
                                 <div className='resend_code_container'>
                                    <button type='button'><span onClick={(event) => this.handleResendCode(event)} className='link' id='resend_code_link'>Resend Code</span></button>
                                 </div>                        
@@ -81,7 +96,7 @@ export default class Verification extends Component {
         axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/code_verify/login/code_verify/resend_code", this.state)
         .then(res => {
             if(JSON.parse(res.data).success){
-                alert(`Your code has been resent to ${this.state.username}`);
+                alert(`Your code has been resent to your email and phone`);
                 return;
             }
 
@@ -102,16 +117,29 @@ export default class Verification extends Component {
                 this.setState({success: true});
                 return;
             }
-            if(result.error === 'Incorrect code'){
-                this.setState({verify_alert: 
-                    <AlertBox id='verify_alert' alert='Invalid code'></AlertBox>
-                })
-            }
-            if(result.error === 'Expired code'){
-                this.setState({verify_alert:
-                    <AlertBox id='verify_alert' alert='Expired code'></AlertBox>
-                })
-            }
+            
+            result.error.forEach((items, key) => {
+                if(items === 'Unmatched phone code'){
+                    this.setState({phone_verify_alert:
+                        <AlertBox id='phone_verify_alert' alert='Invalid code'></AlertBox>
+                    })
+                }
+                if(items === 'Unmatched email code'){
+                    this.setState({email_verify_alert:
+                        <AlertBox id='email_verify_alert' alert='Invalid code'></AlertBox>
+                    })
+                }
+                if(items === 'Phone code expired'){
+                    this.setState({phone_verify_alert:
+                        <AlertBox id='phone_verify_alert' alert='Code expired'></AlertBox>
+                    })
+                }
+                if(items === 'Email code expired'){
+                    this.setState({email_verify_alert:
+                        <AlertBox id='email_verify_alert' alert='Code expired'></AlertBox>
+                    })
+                }            
+            })
         })
         .catch(err => {
             console.log(err)
