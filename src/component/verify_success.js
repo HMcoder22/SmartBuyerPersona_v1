@@ -11,6 +11,7 @@ export default class VerifySuccess extends Component {
     }
     render() {
         if(sessionStorage.getItem('verify_success') === 'true'){
+            sessionStorage.setItem('verification', "false")
             if(this.state.to_login){
                 return (
                     <Navigate to='/login' replace></Navigate>

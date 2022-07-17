@@ -79,100 +79,103 @@ export default class CreateAccount extends Component {
     render() {
         document.title = "Create an account"
 
-        if(this.state.success){
+        if(!sessionStorage.getItem('loginSuccess')){
+            sessionStorage.setItem('verification', "false");
+            if(this.state.success){
+                return (
+                    <Navigate to='/login/code_verify' replace></Navigate>
+                )
+            }
             return (
-                <Navigate to='/login/code_verify' replace></Navigate>
-            )
-        }
-        return (
-            <div className='create_account_authenticate'>
-                <div className='arrow_decoration'>
-                    <div className='arrow_container'>
-                        <div className='top arrow_background'></div>
-                        <div className='middle arrow_background'></div>
-                        <div className='bottom arrow_background'></div>
-                    </div>
-                </div>
-                <div className='sign_in_box'>
-                        <div className='create_container'>
-                            <h2 className='label' id='create_account_label'>Create an account</h2>
-                            <form className='form' onSubmit={(event) => this.handleSubmit(event)} id='create_account_form'>
-                                <div className='create_account_box'>
-                                    <div className='name_box'>
-                                        <div className='name_label_wrapper'>
-                                            <label className='label' id='name_label'>Full Name</label>
-                                            <label className='asterisk'>*</label>
-                                        </div>
-                                        <InputType {...this.state.full_name_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                    {this.state.fname_alert}
-                                    <div className='birthdate_box'>
-                                        <div className='birthdate_label_wrapper'><label className='label' id='birthdate_label'>Birthdate (YYYY-MM-DD)</label></div>
-                                        <InputType {...this.state.birthdate_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                    <div className='job_box'>
-                                        <div className='job_label_wrapper'>
-                                            <label className='label' id='job_label'>Occupation</label>
-                                            <label className='asterisk'>*</label>
-                                        </div>
-                                        <InputType {...this.state.job_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                    {this.state.job_alert}
-                                    {this.state.birthdate_alert}
-                                    <div className='email_box'>
-                                        <div className='email_label_wrapper'>
-                                            <label className='label' id='email_label'>Email</label>
-                                            <label className='asterisk'>*</label>
-                                        </div>
-                                        <InputType {...this.state.email_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                    {this.state.email_alert}
-                                    <div className='bname_box'>
-                                        <div className='bname_label_wrapper'>
-                                            <label className='label' id='bname_label'>Business Name</label>
-                                            <label className='asterisk'>*</label>
-                                        </div>
-                                        <InputType {...this.state.bname_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                    {this.state.bname_alert}
-                                    <div className='phone_number_box'>
-                                        <div className='phone_number_label_wrapper'>
-                                            <label className='label' id='phone_number_label'>Phone Number</label>
-                                            <label className='asterisk'>*</label>
-                                        </div>
-                                        <InputType {...this.state.phone_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                    {this.state.phone_alert}
-
-                                    <div className='password_box'>
-                                        <div className='password_label_wrapper'>
-                                            <label className='label' id='password_label'>Password</label>
-                                            <label className='asterisk'>*</label>
-                                        </div>
-                                        <InputType {...this.state.password_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                    {this.state.pass_alert}
-                                    <div className='password_reenter_box'>
-                                        <div className='password_reenter_label_wrapper'>
-                                            <label className='label' id='password_reenter_label'>Re-enter Password</label>
-                                            <label className='asterisk'>*</label>
-                                        </div>
-                                        <InputType {...this.state.reenter_password_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                    {this.state.repass_alert}
-                                </div>
-                                <div className='forgot_password_wrapper'>
-                                    <Link to='/login/forgot/password' id='forgot_password_link'>Forgot Password</Link>
-                                </div>
-                                <button className='create_account_submission' type='submit' name='login_button'>Sign Up</button>
-                                <div className='login_wrapper'>
-                                    <Link to='/login' id='login_link'>Sign In</Link>
-                                </div>
-                            </form>
+                <div className='create_account_authenticate'>
+                    <div className='arrow_decoration'>
+                        <div className='arrow_container'>
+                            <div className='top arrow_background'></div>
+                            <div className='middle arrow_background'></div>
+                            <div className='bottom arrow_background'></div>
                         </div>
                     </div>
-            </div>
-        )
+                    <div className='sign_in_box'>
+                            <div className='create_container'>
+                                <h2 className='label' id='create_account_label'>Create an account</h2>
+                                <form className='form' onSubmit={(event) => this.handleSubmit(event)} id='create_account_form'>
+                                    <div className='create_account_box'>
+                                        <div className='name_box'>
+                                            <div className='name_label_wrapper'>
+                                                <label className='label' id='name_label'>Full Name</label>
+                                                <label className='asterisk'>*</label>
+                                            </div>
+                                            <InputType {...this.state.full_name_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        </div>
+                                        {this.state.fname_alert}
+                                        <div className='birthdate_box'>
+                                            <div className='birthdate_label_wrapper'><label className='label' id='birthdate_label'>Birthdate (YYYY-MM-DD)</label></div>
+                                            <InputType {...this.state.birthdate_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        </div>
+                                        <div className='job_box'>
+                                            <div className='job_label_wrapper'>
+                                                <label className='label' id='job_label'>Occupation</label>
+                                                <label className='asterisk'>*</label>
+                                            </div>
+                                            <InputType {...this.state.job_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        </div>
+                                        {this.state.job_alert}
+                                        {this.state.birthdate_alert}
+                                        <div className='email_box'>
+                                            <div className='email_label_wrapper'>
+                                                <label className='label' id='email_label'>Email</label>
+                                                <label className='asterisk'>*</label>
+                                            </div>
+                                            <InputType {...this.state.email_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        </div>
+                                        {this.state.email_alert}
+                                        <div className='bname_box'>
+                                            <div className='bname_label_wrapper'>
+                                                <label className='label' id='bname_label'>Business Name</label>
+                                                <label className='asterisk'>*</label>
+                                            </div>
+                                            <InputType {...this.state.bname_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        </div>
+                                        {this.state.bname_alert}
+                                        <div className='phone_number_box'>
+                                            <div className='phone_number_label_wrapper'>
+                                                <label className='label' id='phone_number_label'>Phone Number</label>
+                                                <label className='asterisk'>*</label>
+                                            </div>
+                                            <InputType {...this.state.phone_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        </div>
+                                        {this.state.phone_alert}
+
+                                        <div className='password_box'>
+                                            <div className='password_label_wrapper'>
+                                                <label className='label' id='password_label'>Password</label>
+                                                <label className='asterisk'>*</label>
+                                            </div>
+                                            <InputType {...this.state.password_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        </div>
+                                        {this.state.pass_alert}
+                                        <div className='password_reenter_box'>
+                                            <div className='password_reenter_label_wrapper'>
+                                                <label className='label' id='password_reenter_label'>Re-enter Password</label>
+                                                <label className='asterisk'>*</label>
+                                            </div>
+                                            <InputType {...this.state.reenter_password_input} onChange={(event) => this.handleChange(event)}></InputType>
+                                        </div>
+                                        {this.state.repass_alert}
+                                    </div>
+                                    <div className='forgot_password_wrapper'>
+                                        <Link to='/login/forgot/password' id='forgot_password_link'>Forgot Password</Link>
+                                    </div>
+                                    <button className='create_account_submission' type='submit' name='login_button'>Sign Up</button>
+                                    <div className='login_wrapper'>
+                                        <Link to='/login' id='login_link'>Sign In</Link>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            )
+        }
     }
 
     handleChange(event){
