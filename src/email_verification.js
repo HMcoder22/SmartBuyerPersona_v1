@@ -1,44 +1,34 @@
 import React, { Component } from 'react';
-import './CSS/login.css';
+import './CSS/verifycode.css';
 import InputType from './component/input_type';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import AlertBox from './component/alert_box';
 
-
-export default class Verification extends Component {
+export default class EmailVerifcation extends Component {
     constructor(props){
         super(props);
         this.state = {
+            email: sessionStorage.getItem('forgot email'),
             email_verified_code: '',
-            phone_verified_code: '',
-            username: sessionStorage.getItem('registered email'),
             success: false,
             email_verify_alert: [],
-            phone_verify_alert: [],
             email_verification_code_input: {
                 type: 'text',
                 placeholder: 'Enter your email code here',
                 id: 'email_verification_code_input',
                 name: 'email_verified_code'
             },
-            phone_verification_code_input: {
-                type: 'text',
-                placeholder: 'Enter your phone code here',
-                id: 'phone_verification_code_input',
-                name: 'phone_verified_code'
-            }
         }
     }
     render() {
-        document.title = "Verification"
+        document.title = "Email verification";
 
-        if(sessionStorage.getItem('verification') === 'true'){
+        if(sessionStorage.getItem('email verification') === 'true'){
             if(this.state.success){
-                sessionStorage.setItem('verification', 'false');
-                sessionStorage.setItem('verify_success', 'true')
-                return(
-                    <Navigate to='/login/code_verify/success' replace></Navigate>
+                sessionStorage.setItem('email verification', 'false');
+                return (
+                    <Navigate to='/forgot/password/reset_password'></Navigate>
                 )
             }
             return (
@@ -53,7 +43,7 @@ export default class Verification extends Component {
                     <div className='code_verify_box'>
                         <div className='code_verify_container'>
                             <div className='verification_notification_box'>
-                                <span className='verification_notified'>The verification code has been sent to your {this.state.username}</span>
+                                <span className='verification_notified'>The verification code has been sent to your {this.state.email}</span>
                             </div>
                             <h2 className='label' id='code_verify_label'>Code Verification</h2>
                             <form className='form' onSubmit={(event) => this.handleVerify(event)} id='code_verify_form'>
@@ -63,12 +53,6 @@ export default class Verification extends Component {
                                     </div>
                                 </div>
                                 {this.state.email_verify_alert}
-                                <div className='verify_box'>
-                                    <div className='code_verification_box'>
-                                        <InputType {...this.state.phone_verification_code_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                </div>
-                                {this.state.phone_verify_alert}
                                 <div className='resend_code_container'>
                                    <button type='button'><span onClick={(event) => this.handleResendCode(event)} className='link' id='resend_code_link'>Resend Code</span></button>
                                 </div>                        
@@ -80,7 +64,6 @@ export default class Verification extends Component {
             )
         }
         else{
-            sessionStorage.setItem('verification', "false");
             return (
                 <Navigate to='/login' replace></Navigate>
             )
@@ -88,22 +71,17 @@ export default class Verification extends Component {
     }
 
     handleChange(event){
-        if(this.state.email_verify_alert !== [] && event.target.name === 'email_verified_code'){
-            this.setState({email_verify_alert: []});
-        }
-        if(this.state.phone_verify_alert !== [] && event.target.name === 'phone_verified_code'){
-            this.setState({phone_verify_alert: []});
-        }
         this.setState({[event.target.name] : event.target.value});
+        this.setState({email_alert: []});
     }
 
     handleResendCode(event){
         event.preventDefault();
-        // axios.post("http://localhost:4001/login/code_verify/resend_code", this.state)
-        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/code_verify/login/code_verify/resend_code", this.state)
+        // axios.post("http://localhost:4000/forgot_password/email_verify/resend_code", this.state)
+        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/code_verify/forgot_password/email_verify/resend_code", this.state)
         .then(res => {
             if(JSON.parse(res.data).success){
-                alert(`Your code has been resent to your email and phone`);
+                alert(`Your code has been resent to your email ${this.state.email}`);
                 return;
             }
 
@@ -116,42 +94,31 @@ export default class Verification extends Component {
 
     handleVerify(event){
         event.preventDefault();
-        this.setState({phone_verify_alert: []});
-        this.setState({email_verify_alert: []});
-        // axios.post("http://localhost:4001/login/code_verify", this.state)
-        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/code_verify/login/code_verify", this.state)
+        this.setState({email_alert: []});
+        // axios.post("http://localhost:4000/forgot_password/email_verify", this.state)
+        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/code_verify/forgot_password/email_verify", this.state)
         .then(res => {
             const result = JSON.parse(res.data);
+            console.log(result);
             if(result.success){
                 this.setState({success: true});
                 return;
             }
-            
-            result.error.forEach((items, key) => {
-                if(items === 'Unmatched phone code'){
-                    this.setState({phone_verify_alert:
-                        <AlertBox id='phone_verify_alert' alert='Invalid code'></AlertBox>
-                    })
-                }
-                if(items === 'Unmatched email code'){
-                    this.setState({email_verify_alert:
-                        <AlertBox id='email_verify_alert' alert='Invalid code'></AlertBox>
-                    })
-                }
-                if(items === 'Phone code expired'){
-                    this.setState({phone_verify_alert:
-                        <AlertBox id='phone_verify_alert' alert='Code expired'></AlertBox>
-                    })
-                }
-                if(items === 'Email code expired'){
-                    this.setState({email_verify_alert:
-                        <AlertBox id='email_verify_alert' alert='Code expired'></AlertBox>
-                    })
-                }            
-            })
+
+            if(result.error === 'Unmatched email code'){
+                this.setState({email_alert: 
+                    <AlertBox id='email_alert' alert={"Invalid code"}></AlertBox>
+                })
+            }
+            if(result.error === 'Email code expired'){
+                this.setState({email_alert: 
+                    <AlertBox id='email_alert' alert="Code expired"></AlertBox>
+                })
+            }
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
         })
     }
+
 }

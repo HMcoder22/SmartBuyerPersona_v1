@@ -74,7 +74,7 @@ export default class Login extends Component {
                                 </div>
                                 {this.state.auth_alert}
                                 <div className='forgot_password_wrapper'>
-                                    <Link to='/login/forgot/password' id='forgot_password_link'>Forgot Password</Link>
+                                    <Link to='/forgot/password' id='forgot_password_link'>Forgot Password</Link>
                                 </div>
                                 <button className='login_submission' type='submit' name='login_button'>Login</button>
                                 <div className='create_wrapper'>
@@ -104,8 +104,8 @@ export default class Login extends Component {
         e.preventDefault();
         this.setState({auth_alert: []});
 
-        axios.post("http://localhost:4002/login/authentication", this.state)
-        // axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/authenticate/login/authentication", this.state)
+        // axios.post("http://localhost:4002/login/authentication", this.state)
+        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/authenticate/login/authentication", this.state)
         .then(res =>{
             const ret = JSON.parse(res.data);
             if(ret.result === 'success'){
