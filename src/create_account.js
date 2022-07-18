@@ -210,8 +210,8 @@ export default class CreateAccount extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:4000/login/sign_up", this.state)
-        // axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/create_account/login/sign_up", this.state)
+        // axios.post("http://localhost:4000/login/sign_up", this.state)
+        axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/create_account/login/sign_up", this.state)
         .then(res =>{
             const result = JSON.parse(res.data);
             if(result.success){
