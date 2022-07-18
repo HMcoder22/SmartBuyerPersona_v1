@@ -88,6 +88,12 @@ export default class Verification extends Component {
     }
 
     handleChange(event){
+        if(this.state.email_verify_alert !== [] && event.target.name === 'email_verified_code'){
+            this.setState({email_verify_alert: []});
+        }
+        if(this.state.phone_verify_alert !== [] && event.target.name === 'phone_verified_code'){
+            this.setState({phone_verify_alert: []});
+        }
         this.setState({[event.target.name] : event.target.value});
     }
 
@@ -110,6 +116,8 @@ export default class Verification extends Component {
 
     handleVerify(event){
         event.preventDefault();
+        this.setState({phone_verify_alert: []});
+        this.setState({email_verify_alert: []});
         // axios.post("http://localhost:4001/login/code_verify", this.state)
         axios.post("https://splendorous-dieffenbachia-f3bbe0.netlify.app/.netlify/functions/code_verify/login/code_verify", this.state)
         .then(res => {
