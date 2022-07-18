@@ -63,12 +63,6 @@ export default class Verification extends Component {
                                     </div>
                                 </div>
                                 {this.state.email_verify_alert}
-                                <div className='verify_box'>
-                                    <div className='code_verification_box'>
-                                        <InputType {...this.state.phone_verification_code_input} onChange={(event) => this.handleChange(event)}></InputType>
-                                    </div>
-                                </div>
-                                {this.state.phone_verify_alert}
                                 <div className='resend_code_container'>
                                    <button type='button'><span onClick={(event) => this.handleResendCode(event)} className='link' id='resend_code_link'>Resend Code</span></button>
                                 </div>                        
