@@ -15,6 +15,8 @@ import LoginRequirement from './component/loginRequirement';
 import CreateAccount from './create_account';
 import Verification from './verification';
 import VerifySuccess from './component/verify_success';
+import ForgotPassword from './forgot_password';
+import EmailVerifcation from './email_verification';
 import './CSS/nav.css';
 import './CSS/demo_form.css';
 import './CSS/transition_tools.css';
@@ -35,7 +37,8 @@ root.render(
             <Route path='/login' exact element={<Login></Login>}>
             </Route>
             <Route path='/create_account' exact element={<CreateAccount></CreateAccount>}></Route>
-            <Route path='/login/forgot/password' exact element={<div>Forgot</div>}></Route>
+            <Route path='/forgot/password' exact element={<ForgotPassword></ForgotPassword>}></Route>
+            <Route path='/forgot/password/email_verification' exact element={<EmailVerifcation></EmailVerifcation>}></Route>
             <Route path='/login/requirement' exact element={<LoginRequirement></LoginRequirement>}></Route>
             <Route path='/login/code_verify' exact element={<Verification></Verification>}></Route>
             <Route path='/login/code_verify/success' exact element={<VerifySuccess></VerifySuccess>}></Route>

@@ -74,7 +74,7 @@ export default class Login extends Component {
                                 </div>
                                 {this.state.auth_alert}
                                 <div className='forgot_password_wrapper'>
-                                    <Link to='/login/forgot/password' id='forgot_password_link'>Forgot Password</Link>
+                                    <Link to='/forgot/password' id='forgot_password_link'>Forgot Password</Link>
                                 </div>
                                 <button className='login_submission' type='submit' name='login_button'>Login</button>
                                 <div className='create_wrapper'>
