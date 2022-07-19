@@ -163,7 +163,7 @@ export default class CreateAccount extends Component {
                                         {this.state.repass_alert}
                                     </div>
                                     <div className='forgot_password_wrapper'>
-                                        <Link to='/login/forgot/password' id='forgot_password_link'>Forgot Password</Link>
+                                        <Link to='/forgot/password' id='forgot_password_link'>Forgot Password</Link>
                                     </div>
                                     <button className='create_account_submission' type='submit' name='login_button'>Sign Up</button>
                                     <div className='login_wrapper'>

@@ -82,7 +82,7 @@ export default class ForgotPassword extends Component {
             }
             if(result.error === 'Invalid email'){
                 this.setState({email_alert: 
-                    <AlertBox id='email_alert' alert="Invalid email"></AlertBox>
+                    <AlertBox id='email_forgot_alert' alert="Invalid email"></AlertBox>
                 })
             }
         })

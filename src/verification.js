@@ -36,7 +36,8 @@ export default class Verification extends Component {
         if(sessionStorage.getItem('verification') === 'true'){
             if(this.state.success){
                 sessionStorage.setItem('verification', 'false');
-                sessionStorage.setItem('verify_success', 'true')
+                sessionStorage.setItem('verify_success', 'true');
+                sessionStorage.setItem('registered email', '');
                 return(
                     <Navigate to='/login/code_verify/success' replace></Navigate>
                 )
